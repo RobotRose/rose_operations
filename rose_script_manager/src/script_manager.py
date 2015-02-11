@@ -1,11 +1,11 @@
 #! /usr/bin/env python
-import roslib; roslib.load_manifest('gui_script_manager')
+import roslib;
 import rospy
 import actionlib
 
 from scripts import Script
 
-from gui_script_manager.msg import *
+from rose_script_manager.msg import *
 
 class ScriptManagerServer:
 	def __init__(self):
