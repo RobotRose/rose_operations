@@ -17,6 +17,6 @@
 #include <ros/ros.h>
 #include <stdio.h>
 
-#include "move_to.hpp"
+#include "move_to/move_to.hpp"
 
 #endif // MOVE_TO_NODE_HPP

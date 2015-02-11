@@ -27,7 +27,7 @@ class OpenGripper : public OperationBaseClass
     void CB_armActionFail( const actionlib::SimpleClientGoalState& state, const arm_controller::manipulateResultConstPtr& result );
 
     void openAction();
-    void receiveGoal( const operations::basic_operationGoalConstPtr& goal, SMC* smc );
+    void receiveGoal( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc );
 };
 
 #endif //OPEN_GRIPPER_HPP

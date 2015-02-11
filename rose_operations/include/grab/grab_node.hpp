@@ -17,6 +17,6 @@
 #include <ros/ros.h>
 #include <stdio.h>
 
-#include "grab.hpp"
+#include "grab/grab.hpp"
 
 #endif // GRAB_NODE_HPP

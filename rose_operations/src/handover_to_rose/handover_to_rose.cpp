@@ -33,7 +33,7 @@ void HandoverToRose::CB_armActionFail( const actionlib::SimpleClientGoalState& s
 	sendResult(false);
 }
 
-void HandoverToRose::CB_goalReceived(const operations::basic_operationGoalConstPtr& goal, SMC* smc )
+void HandoverToRose::CB_goalReceived(const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc )
 {
     bool success = handoverToRoseAction();
     if(success)

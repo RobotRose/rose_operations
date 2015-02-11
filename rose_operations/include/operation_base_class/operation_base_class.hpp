@@ -65,7 +65,7 @@ class OperationBaseClass
     typedef ServerMultipleClient<operations::basic_operationAction> SMC;
 
 	virtual void CB_serverCancel( SMC* smc );
-	virtual void CB_goalReceived( const operations::basic_operationGoalConstPtr& goal, SMC* smc );
+	virtual void CB_goalReceived( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc );
 	
 	virtual void startOperation();
 	virtual void sendResult( bool succes );

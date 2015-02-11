@@ -17,6 +17,6 @@
 #include <ros/ros.h>
 #include <stdio.h>
 
-#include "strech.hpp"
+#include "strech/strech.hpp"
 
 #endif // STRECH_NODE_HPP

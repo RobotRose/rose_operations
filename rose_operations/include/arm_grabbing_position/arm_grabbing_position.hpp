@@ -25,7 +25,7 @@ class ArmGrabbingPosition : public OperationBaseClass
     ~ArmGrabbingPosition();
 
   private:
-    void CB_goalReceived(const operations::basic_operationGoalConstPtr& goal, SMC* smc);
+    void CB_goalReceived(const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc);
     void CB_armActionSuccess(const actionlib::SimpleClientGoalState& state,
                              const arm_controller::manipulateResultConstPtr& result);
     void CB_armActionFail(const actionlib::SimpleClientGoalState& state,

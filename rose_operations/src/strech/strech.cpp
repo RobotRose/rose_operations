@@ -33,7 +33,7 @@ void Strech::CB_armActionFail( const actionlib::SimpleClientGoalState& state, co
     sendResult(false);
 }
 
-void Strech::CB_goalReceived( const operations::basic_operationGoalConstPtr& goal, SMC* smc )
+void Strech::CB_goalReceived( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc )
 {
 	strechArms();
 }

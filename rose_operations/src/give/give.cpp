@@ -33,7 +33,7 @@ void Give::CB_armActionFail( const actionlib::SimpleClientGoalState& state, cons
 	sendResult(false);
 }
 
-void Give::receiveGoal( const operations::basic_operationGoalConstPtr& goal, SMC* smc )
+void Give::receiveGoal( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc )
 {
 	giveAction( "dummy" ); // Overriding choices for items
 }

@@ -61,7 +61,7 @@ void OperationManager::addClients()
 }
 
 // Client callbacks
-void OperationManager::CB_action_success( const actionlib::SimpleClientGoalState& state, const operations::basic_operationResultConstPtr& result )
+void OperationManager::CB_action_success( const actionlib::SimpleClientGoalState& state, const rose_operations::basic_operationResultConstPtr& result )
 {
 	ROS_INFO_NAMED(ROS_NAME, "OperationManager::CB_action_success");
 	// Last action was succesful
@@ -71,7 +71,7 @@ void OperationManager::CB_action_success( const actionlib::SimpleClientGoalState
 		runNextOperation();
 }
 
-void OperationManager::CB_action_fail( const actionlib::SimpleClientGoalState& state, const operations::basic_operationResultConstPtr& result )
+void OperationManager::CB_action_fail( const actionlib::SimpleClientGoalState& state, const rose_operations::basic_operationResultConstPtr& result )
 {
 	nr_fails_++;
 	if ( nr_fails_ > MAX_NR_FAILS )
@@ -113,7 +113,7 @@ void OperationManager::CB_action_fail( const actionlib::SimpleClientGoalState& s
 void OperationManager::addPlanningToOperationList( rose_action_planner::recover planning_request )
 {
 	ROS_DEBUG_NAMED(ROS_NAME, "OperationManager::addPlanningToOperationList");
-	tuple<operations::basic_operationGoal, std::string> operation;
+	tuple<rose_operations::basic_operationGoal, std::string> operation;
 
 	ROS_DEBUG_NAMED(ROS_NAME, "%d recover scripts received", (int)planning_request.response.recover_scripts.size());
 	// Move to the list backwards
@@ -148,7 +148,7 @@ void OperationManager::CB_serverWork( const rose_operation_manager::executeGoalC
 		roscomm::stringlist param_ids;
 		stringlist.values.push_back("dummy");
 
-        tuple<operations::basic_operationGoal, std::string> operation = createOperation(stringlist, param_ids, goal->script_id);
+        tuple<rose_operations::basic_operationGoal, std::string> operation = createOperation(stringlist, param_ids, goal->script_id);
 		operation_list_.push_back(operation);
 		runNextOperation();
 	}
@@ -169,7 +169,7 @@ void OperationManager::CB_serverWork( const rose_operation_manager::executeGoalC
         ROS_DEBUG_NAMED(ROS_NAME, "Creating and queueing a %s operation with %i item_ids and %i parameters:",
                         goal->script_id.c_str(), (int)item_ids.values.size(), (int)param_ids.values.size());
 
-        tuple<operations::basic_operationGoal, std::string> operation = createOperation(item_ids, param_ids, goal->script_id);
+        tuple<rose_operations::basic_operationGoal, std::string> operation = createOperation(item_ids, param_ids, goal->script_id);
 
 		operation_list_.push_back(operation);
 		runNextOperation();
@@ -178,11 +178,11 @@ void OperationManager::CB_serverWork( const rose_operation_manager::executeGoalC
 	ROS_INFO("OperationManager::CB_serverWork::end");
 }
 
-tuple<operations::basic_operationGoal, std::string> OperationManager::createOperation( const roscomm::stringlist item_ids, const roscomm::stringlist parameter_ids, const std::string script_id )
+tuple<rose_operations::basic_operationGoal, std::string> OperationManager::createOperation( const roscomm::stringlist item_ids, const roscomm::stringlist parameter_ids, const std::string script_id )
 {
 	//! @todo MdL: Support multiple items
     // Check if script has item ids
-	operations::basic_operationGoal client_goal;
+	rose_operations::basic_operationGoal client_goal;
 
 	for ( auto& item_id : item_ids.values )
 		client_goal.item_ids.push_back(item_id);
@@ -190,7 +190,7 @@ tuple<operations::basic_operationGoal, std::string> OperationManager::createOper
 	for ( auto& param_id : parameter_ids.values )
 		client_goal.parameter_ids.push_back(param_id);
 
-	return tuple<operations::basic_operationGoal, std::string>(client_goal, "/basic_operation/" + script_id);
+	return tuple<rose_operations::basic_operationGoal, std::string>(client_goal, "/basic_operation/" + script_id);
 }
 
 void OperationManager::runNextOperation()
@@ -201,7 +201,7 @@ void OperationManager::runNextOperation()
 
 	if ( not operation_list_.empty())
 	{
-		tuple<operations::basic_operationGoal, std::string> operation = operation_list_.front();
+		tuple<rose_operations::basic_operationGoal, std::string> operation = operation_list_.front();
 		operation_list_.pop_front();
 
 		smc_->sendGoal<ActionMessage>(std::get<0>(operation), std::get<1>(operation));

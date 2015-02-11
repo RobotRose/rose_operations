@@ -17,6 +17,6 @@
 #include <ros/ros.h>
 #include <stdio.h>
 
-#include "position_determinator.hpp"
+#include "position_determinator/position_determinator.hpp"
 
 #endif // POSITION_DETERMINATOR_NODE_HPP

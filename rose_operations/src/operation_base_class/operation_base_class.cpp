@@ -189,7 +189,7 @@ void OperationBaseClass::sendResult( bool succes, std::string message )
     smc_->sendServerResult( succes, result_ );
 }
 
-void OperationBaseClass::CB_goalReceived( const operations::basic_operationGoalConstPtr& goal, SMC* smc )
+void OperationBaseClass::CB_goalReceived( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc )
 {
     current_parameters_ids_ = goal->parameter_ids;
 

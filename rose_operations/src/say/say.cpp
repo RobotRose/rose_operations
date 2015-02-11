@@ -30,7 +30,7 @@ void Say::CB_serverCancel( SMC* smc )
 	cancel_ = true;	
 }
 
-void Say::receiveGoal( const operations::basic_operationGoalConstPtr& goal, SMC* smc )
+void Say::receiveGoal( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc )
 {
     //homedir 
     passwd* pw = getpwuid(getuid());

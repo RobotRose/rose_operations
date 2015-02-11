@@ -33,7 +33,7 @@ void CloseGripper::CB_armActionFail( const actionlib::SimpleClientGoalState& sta
 	sendResult(false);
 }
 
-void CloseGripper::receiveGoal( const operations::basic_operationGoalConstPtr& goal, SMC* smc )
+void CloseGripper::receiveGoal( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc )
 {
 	closeAction(); // Overriding choices for items
 }

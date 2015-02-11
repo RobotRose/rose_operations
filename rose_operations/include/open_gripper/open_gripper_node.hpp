@@ -17,6 +17,6 @@
 #include <ros/ros.h>
 #include <stdio.h>
 
-#include "open_gripper.hpp"
+#include "open_gripper/open_gripper.hpp"
 
 #endif // OPEN_GRIPPER_NODE_HPP

@@ -17,6 +17,6 @@
 #include <ros/ros.h>
 #include <stdio.h>
 
-#include "arm_grabbing_position.hpp"
+#include "arm_grabbing_position/arm_grabbing_position.hpp"
 
 #endif // ARM_GRABBING_POSITION_NODE_HPP

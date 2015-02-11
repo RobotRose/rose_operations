@@ -23,7 +23,7 @@ class Give : public OperationBaseClass
 	~Give();
 
   private:
-    void receiveGoal( const operations::basic_operationGoalConstPtr& goal, SMC* smc );
+    void receiveGoal( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc );
 
     void CB_armActionSuccess( const actionlib::SimpleClientGoalState& state, const arm_controller::manipulateResultConstPtr& result );
     void CB_armActionFail( const actionlib::SimpleClientGoalState& state, const arm_controller::manipulateResultConstPtr& result );

@@ -17,6 +17,6 @@
 #include <ros/ros.h>
 #include <stdio.h>
 
-#include "handover_to_rose.hpp"
+#include "handover_to_rose/handover_to_rose.hpp"
 
 #endif // HANDOVER_TO_ROSE_NODE_HPP

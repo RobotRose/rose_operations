@@ -30,7 +30,7 @@ class Say : public OperationBaseClass
   private:
   	void CB_serverCancel( SMC* smc );
 
-  	void receiveGoal( const operations::basic_operationGoalConstPtr& goal, SMC* smc );
+  	void receiveGoal( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc );
 
   	bool cancel_;
 

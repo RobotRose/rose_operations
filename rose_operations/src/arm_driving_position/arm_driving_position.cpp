@@ -30,7 +30,7 @@ void ArmDrivingPosition::CB_armActionFail( const actionlib::SimpleClientGoalStat
 {
 }
 
-void ArmDrivingPosition::CB_goalReceived( const operations::basic_operationGoalConstPtr& goal, SMC* smc )
+void ArmDrivingPosition::CB_goalReceived( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc )
 {
     moveArmToDrivingPosition();
 }

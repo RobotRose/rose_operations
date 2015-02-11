@@ -31,7 +31,7 @@ void ArmGrabbingPosition::CB_armActionFail( const actionlib::SimpleClientGoalSta
 {
 }
 
-void ArmGrabbingPosition::CB_goalReceived( const operations::basic_operationGoalConstPtr& goal, SMC* smc )
+void ArmGrabbingPosition::CB_goalReceived( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc )
 {
 	moveArmToGrabbingPosition();
 }

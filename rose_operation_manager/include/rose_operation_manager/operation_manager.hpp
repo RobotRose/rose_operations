@@ -17,16 +17,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-
-#include "operations/basic_operationAction.h"
-#include "operations/basic_operationGoal.h"
-#include "operations/basic_operationResult.h"
-#include "operations/basic_operationFeedback.h"
-
 #include "rose_operation_manager/executeAction.h"
 #include "rose_operation_manager/executeGoal.h"
 #include "rose_operation_manager/executeResult.h"
 #include "rose_operation_manager/executeFeedback.h"
+
+#include "rose_operations/basic_operationAction.h"
+#include "rose_operations/basic_operationGoal.h"
+#include "rose_operations/basic_operationResult.h"
+#include "rose_operations/basic_operationFeedback.h"
 
 #include "rose_action_planner/recover.h"
 
@@ -46,7 +45,7 @@ using std::vector;
 class OperationManager
 {
     typedef rose_operation_manager::executeAction         OperationManagerMessage;
-    typedef operations::basic_operationAction             ActionMessage;
+    typedef rose_operations::basic_operationAction             ActionMessage;
     typedef ServerMultipleClient<OperationManagerMessage> SMC;
 
   public:
@@ -61,13 +60,13 @@ class OperationManager
     void sendResult(bool succes, ACTION_RESULT result_code);
 
     // Grab
-    void CB_action_success( const actionlib::SimpleClientGoalState& state, const operations::basic_operationResultConstPtr& result );
-    void CB_action_fail( const actionlib::SimpleClientGoalState& state, const operations::basic_operationResultConstPtr& result );
+    void CB_action_success( const actionlib::SimpleClientGoalState& state, const rose_operations::basic_operationResultConstPtr& result );
+    void CB_action_fail( const actionlib::SimpleClientGoalState& state, const rose_operations::basic_operationResultConstPtr& result );
 
     void runNextOperation();
 
     void addPlanningToOperationList( rose_action_planner::recover planning_request );
-    tuple<operations::basic_operationGoal, std::string> createOperation( const roscomm::stringlist item_ids, const roscomm::stringlist parameter_ids, const std::string script_id );
+    tuple<rose_operations::basic_operationGoal, std::string> createOperation( const roscomm::stringlist item_ids, const roscomm::stringlist parameter_ids, const std::string script_id );
 
     bool                                    running_operations_;
     int                                     nr_fails_;
@@ -77,7 +76,7 @@ class OperationManager
 
   	SMC*	                                smc_;
     vector<std::string>	                    clients_;
-    list<tuple<operations::basic_operationGoal, std::string>> operation_list_;
+    list<tuple<rose_operations::basic_operationGoal, std::string>> operation_list_;
 };
 
 #endif //OPERATION_MANAGER_HPP

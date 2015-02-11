@@ -17,6 +17,6 @@
 #include <ros/ros.h>
 #include <stdio.h>
 
-#include "place.hpp"
+#include "place/place.hpp"
 
 #endif // PLACE_NODE_HPP

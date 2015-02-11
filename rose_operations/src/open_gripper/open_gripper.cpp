@@ -33,7 +33,7 @@ void OpenGripper::CB_armActionFail( const actionlib::SimpleClientGoalState& stat
 	sendResult(false);
 }
 
-void OpenGripper::receiveGoal( const operations::basic_operationGoalConstPtr& goal, SMC* smc )
+void OpenGripper::receiveGoal( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc )
 {
 	openAction(); // Overriding choices for items
 }

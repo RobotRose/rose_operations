@@ -17,6 +17,6 @@
 #include <ros/ros.h>
 #include <stdio.h>
 
-#include "say.hpp"
+#include "say/say.hpp"
 
 #endif // SAY_NODE_HPP
