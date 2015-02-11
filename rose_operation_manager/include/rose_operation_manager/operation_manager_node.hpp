@@ -17,8 +17,6 @@
 #include <ros/ros.h>
 #include <stdio.h>
 
-#include "operation_manager.hpp"
-
-using namespace std;
+#include "rose_operation_manager/operation_manager.hpp"
 
 #endif // OPERATION_MANAGER_NODE_HPP

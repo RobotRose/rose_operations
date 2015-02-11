@@ -44,6 +44,6 @@ add_executable( rose_operation_manager 	src/operation_manager_node.cpp
 									src/operation_manager.cpp
 )
 
-add_dependencies(rose_ operation_manager ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
+add_dependencies(rose_operation_manager ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 
 target_link_libraries( rose_operation_manager ${catkin_LIBRARIES} )

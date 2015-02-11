@@ -23,10 +23,10 @@
 #include "operations/basic_operationResult.h"
 #include "operations/basic_operationFeedback.h"
 
-#include "operation_manager/executeAction.h"
-#include "operation_manager/executeGoal.h"
-#include "operation_manager/executeResult.h"
-#include "operation_manager/executeFeedback.h"
+#include "rose_operation_manager/executeAction.h"
+#include "rose_operation_manager/executeGoal.h"
+#include "rose_operation_manager/executeResult.h"
+#include "rose_operation_manager/executeFeedback.h"
 
 #include "rose_action_planner/recover.h"
 
@@ -45,8 +45,8 @@ using std::vector;
 
 class OperationManager
 {
-    typedef operation_manager::executeAction             OperationManagerMessage;
-    typedef operations::basic_operationAction            ActionMessage;
+    typedef rose_operation_manager::executeAction         OperationManagerMessage;
+    typedef operations::basic_operationAction             ActionMessage;
     typedef ServerMultipleClient<OperationManagerMessage> SMC;
 
   public:
@@ -57,7 +57,7 @@ class OperationManager
     void addClients();
 
     void CB_serverCancel( SMC* smc );
-    void CB_serverWork( const operation_manager::executeGoalConstPtr& goal, SMC* smc );
+    void CB_serverWork( const rose_operation_manager::executeGoalConstPtr& goal, SMC* smc );
     void sendResult(bool succes, ACTION_RESULT result_code);
 
     // Grab

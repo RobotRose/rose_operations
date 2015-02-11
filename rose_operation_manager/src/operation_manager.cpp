@@ -130,14 +130,14 @@ void OperationManager::sendResult( bool succes, ACTION_RESULT result_code )
 {
 	ROS_INFO("OperationManager::sendResult::begin");
 	
-	operation_manager::executeResult result;
+	rose_operation_manager::executeResult result;
 	result.return_code = result_code;
 	smc_->sendServerResult( succes, result );
 
 	ROS_INFO("OperationManager::sendResult::end");
 }
 
-void OperationManager::CB_serverWork( const operation_manager::executeGoalConstPtr& goal, SMC* smc )
+void OperationManager::CB_serverWork( const rose_operation_manager::executeGoalConstPtr& goal, SMC* smc )
 {
 	nr_fails_ = 0;
 
