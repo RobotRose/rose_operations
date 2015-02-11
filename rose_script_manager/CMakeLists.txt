@@ -28,15 +28,15 @@ add_action_files(DIRECTORY action
 
 generate_messages(DEPENDENCIES actionlib_msgs roscomm)
 
-#add_executable(rose_script_manager_node src/ScriptManager.cpp)
-
 catkin_package(
     INCLUDE_DIRS 
         include
     LIBRARIES 
-        gui_script_interaction
     CATKIN_DEPENDS 
-        other_catkin_pkg
+        actionlib
+        actionlib_msgs
+        geometry_msgs
+        std_msgs
     DEPENDS 
         message_runtime
 )
