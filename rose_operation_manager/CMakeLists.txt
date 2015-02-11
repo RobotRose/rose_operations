@@ -5,12 +5,12 @@ set(CMAKE_CXX_FLAGS "-std=c++0x")
 
 find_package(catkin REQUIRED
 	COMPONENTS
-	action_planner
 	actionlib_msgs
-	rose_datamanager_api
 	luctor_classes
 	operations
 	roscomm
+	rose_action_planner
+	rose_datamanager_api
 	server_multiple_client
 )
 
@@ -28,11 +28,11 @@ catkin_package(
 		include
 	#LIBRARIES operation_manager
 	CATKIN_DEPENDS 
-		rose_datamanager_api 
 		luctor_classes 
-		roscomm 
 		operations 
-		action_planner 
+		roscomm 
+		rose_action_planner 
+		rose_datamanager_api 
 		server_multiple_client
 	DEPENDS 
 		actionlib_msgs

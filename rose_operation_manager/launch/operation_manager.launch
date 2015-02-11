@@ -12,7 +12,7 @@
  	
   	<node machine="pc1" name="operation_manager" pkg="operation_manager" type="operation_manager" output="screen" respawn="false"></node>
  	<node machine="pc1" name="parameter_manager" pkg="parameter_manager" type="parameter_manager" respawn="false"></node>
- 	<node machine="pc1" name="action_planner" pkg="action_planner" type="action_planner" output="screen"></node>
+ 	<node machine="pc1" name="rose_action_planner" pkg="rose_action_planner" type="rose_action_planner" output="screen"></node>
  	<node machine="pc1" name="pose_explorer" pkg="pose_explorer" type="pose_explorer" output="screen"></node>
  	<!-- <node pkg="tf" type="static_transform_publisher" name="base_link_lift_transform" args="0.02 0 0.55 0 0 0 /base_link /lift_link 100"/> -->
  	

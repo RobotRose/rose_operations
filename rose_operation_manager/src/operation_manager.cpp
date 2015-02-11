@@ -38,7 +38,7 @@ OperationManager::OperationManager( std::string name, ros::NodeHandle n )
 
 	smc_->startServer();
 
-	action_planner_service_client_ = n_.serviceClient<action_planner::recover>("/action_planner/recover");
+	action_planner_service_client_ = n_.serviceClient<rose_action_planner::recover>("/action_planner/recover");
 }
 
 OperationManager::~OperationManager()
@@ -89,7 +89,7 @@ void OperationManager::CB_action_fail( const actionlib::SimpleClientGoalState& s
 	ROS_INFO_NAMED(ROS_NAME, "received return code: %d", result->return_code);
 
 	// Talk to the action planner
-	action_planner::recover   planning_request;
+	rose_action_planner::recover   planning_request;
     planning_request.request.current_script = smc_->getLastGoal()->script_id;
     for ( auto& item_id : smc_->getLastGoal()->item_ids.at(0).values )
 		planning_request.request.item_ids.push_back(item_id);
@@ -110,7 +110,7 @@ void OperationManager::CB_action_fail( const actionlib::SimpleClientGoalState& s
 		sendResult(false, static_cast<ACTION_RESULT>(result->return_code));
 }
 
-void OperationManager::addPlanningToOperationList( action_planner::recover planning_request )
+void OperationManager::addPlanningToOperationList( rose_action_planner::recover planning_request )
 {
 	ROS_DEBUG_NAMED(ROS_NAME, "OperationManager::addPlanningToOperationList");
 	tuple<operations::basic_operationGoal, std::string> operation;

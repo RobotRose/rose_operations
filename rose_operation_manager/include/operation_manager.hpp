@@ -17,7 +17,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "action_planner/recover.h"
 
 #include "operations/basic_operationAction.h"
 #include "operations/basic_operationGoal.h"
@@ -29,11 +28,14 @@
 #include "operation_manager/executeResult.h"
 #include "operation_manager/executeFeedback.h"
 
+#include "rose_action_planner/recover.h"
+
+#include "std_msgs/String.h"
+
 #include "action_result_message.hpp"
 #include "luctor_base_class/luctor_base_class.hpp"
 #include "operation_base_class/operation_base_class.hpp"
 #include "server_multiple_client/server_multiple_client.hpp"
-#include "std_msgs/String.h"
 
 #define MAX_NR_FAILS 0 // Allowed nr of fails. 0 means no mitigation of operations. Changing this now will (possibly) crash the OM
 
@@ -64,7 +66,7 @@ class OperationManager
 
     void runNextOperation();
 
-    void addPlanningToOperationList( action_planner::recover planning_request );
+    void addPlanningToOperationList( rose_action_planner::recover planning_request );
     tuple<operations::basic_operationGoal, std::string> createOperation( const roscomm::stringlist item_ids, const roscomm::stringlist parameter_ids, const std::string script_id );
 
     bool                                    running_operations_;
