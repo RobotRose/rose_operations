@@ -29,7 +29,6 @@ generate_messages(DEPENDENCIES actionlib_msgs roscomm)
 
 catkin_package(
     INCLUDE_DIRS 
-        include
     LIBRARIES 
     CATKIN_DEPENDS 
         actionlib
