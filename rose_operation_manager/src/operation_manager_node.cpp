@@ -10,7 +10,7 @@
 *	description
 * 
 ***********************************************************************************/
-#include "operation_manager_node.hpp"
+#include "rose_operation_manager/operation_manager_node.hpp"
 
 int main( int argc, char **argv )
 {

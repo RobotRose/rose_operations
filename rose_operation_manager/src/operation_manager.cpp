@@ -10,7 +10,7 @@
 *	description
 * 
 ***********************************************************************************/
-#include "operation_manager.hpp"
+#include "rose_operation_manager/operation_manager.hpp"
 
 OperationManager::OperationManager( std::string name, ros::NodeHandle n )
 	: name_ ( name )
