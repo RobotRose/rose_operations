@@ -1,23 +1,23 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(operations)
+project(rose_operations)
 
 find_package(catkin REQUIRED
 	COMPONENTS
-	arm_controller
 	actionlib 
-    actionlib_msgs 
-	rose_datamanager_api
+	actionlib_msgs 
+	arm_controller
 	geometry_msgs
 	luctor_classes	
 	roscomm
 	rose20_platform
-	server_multiple_client
+	rose_datamanager_api
 	rose_transformations
+	server_multiple_client
 )
 
 set(CMAKE_CXX_FLAGS "-std=c++0x -g")
 
-add_action_files( DIRECTORY action 
+add_action_files(
 	FILES 
     basic_operation.action
 )
