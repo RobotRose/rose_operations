@@ -30,10 +30,10 @@
 #include "arm_controller/move_to_tfResult.h"
 #include "arm_controller/move_to_tfFeedback.h"
 
-#include "operations/basic_operationAction.h"
-#include "operations/basic_operationGoal.h"
-#include "operations/basic_operationResult.h"
-#include "operations/basic_operationFeedback.h"
+#include "rose_operations/basic_operationAction.h"
+#include "rose_operations/basic_operationGoal.h"
+#include "rose_operations/basic_operationResult.h"
+#include "rose_operations/basic_operationFeedback.h"
 
 #include "rose_parameter_manager/parameterAction.h"
 #include "rose_parameter_manager/parameterGoal.h"
