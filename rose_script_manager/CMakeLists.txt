@@ -8,7 +8,6 @@ find_package(catkin REQUIRED
     actionlib 
     actionlib_msgs 
     genmsg 
-    geometry_msgs
     message_generation 
     roscomm
     rospy 
@@ -35,7 +34,6 @@ catkin_package(
     CATKIN_DEPENDS 
         actionlib
         actionlib_msgs
-        geometry_msgs
         std_msgs
     DEPENDS 
         message_runtime
