@@ -10,7 +10,7 @@
 *	description
 * 
 ***********************************************************************************/
-#include "action_planner_node.hpp"
+#include "rose_action_planner/action_planner_node.hpp"
 
 int main( int argc, char **argv )
 {

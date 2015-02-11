@@ -10,7 +10,7 @@
 *	description
 * 
 ***********************************************************************************/
-#include "action_planner.hpp"
+#include "rose_action_planner/action_planner.hpp"
 
 ActionPlanner::ActionPlanner( std::string name, ros::NodeHandle n )
 	: n_ ( n )

@@ -17,6 +17,6 @@
 #include <ros/ros.h>
 #include <stdio.h>
 
-#include "action_planner.hpp"
+#include "rose_action_planner/action_planner.hpp"
 
 #endif // ACTION_PLANNER_NODE_HPP
