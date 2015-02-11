@@ -10,7 +10,7 @@
 
  	<node machine="pc1" name="rose_datamanager" pkg="rose_datamanager" type="rose_datamanager" respawn="false"></node>
  	
-  	<node machine="pc1" name="operation_manager" pkg="operation_manager" type="operation_manager" output="screen" respawn="false"></node>
+  	<node machine="pc1" name="rose_operation_manager" pkg="rose_operation_manager" type="rose_operation_manager" output="screen" respawn="false"></node>
  	<node machine="pc1" name="parameter_manager" pkg="parameter_manager" type="parameter_manager" respawn="false"></node>
  	<node machine="pc1" name="rose_action_planner" pkg="rose_action_planner" type="rose_action_planner" output="screen"></node>
  	<node machine="pc1" name="pose_explorer" pkg="pose_explorer" type="pose_explorer" output="screen"></node>
