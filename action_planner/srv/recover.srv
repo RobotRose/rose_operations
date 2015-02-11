@@ -1,0 +1,8 @@
+string               current_script 
+string[]             item_ids
+string[]             param_ids
+int32                return_code
+---
+string[]             recover_scripts
+roscomm/stringlist[] recover_item_ids
+roscomm/stringlist[] recover_param_ids

@@ -1,0 +1,9 @@
+# Goal
+string[]            item_ids
+string[]            parameter_ids
+---
+# Result
+int32               return_code
+---
+# Feedback
+string              message

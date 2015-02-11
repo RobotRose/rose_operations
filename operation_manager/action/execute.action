@@ -1,0 +1,9 @@
+# Goal
+string 					script_id
+roscomm/stringlist[]    item_ids 
+---
+# Result
+int32 					return_code
+---
+# Feedback
+string 					message

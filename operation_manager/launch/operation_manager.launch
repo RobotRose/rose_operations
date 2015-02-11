@@ -1,0 +1,35 @@
+<launch>
+	<!-- Do mapping argument -->
+    <arg name="mapping" default="false"/> 
+
+    <!-- Do not use machine files argument -->
+    <arg name="sim" default="false"/>
+
+    <!-- Hardware version -->
+    <arg name="hardware" default="simulation"/>
+
+ 	<node machine="pc1" name="rose_datamanager" pkg="rose_datamanager" type="rose_datamanager" respawn="false"></node>
+ 	
+  	<node machine="pc1" name="operation_manager" pkg="operation_manager" type="operation_manager" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="parameter_manager" pkg="parameter_manager" type="parameter_manager" respawn="false"></node>
+ 	<node machine="pc1" name="action_planner" pkg="action_planner" type="action_planner" output="screen"></node>
+ 	<node machine="pc1" name="pose_explorer" pkg="pose_explorer" type="pose_explorer" output="screen"></node>
+ 	<!-- <node pkg="tf" type="static_transform_publisher" name="base_link_lift_transform" args="0.02 0 0.55 0 0 0 /base_link /lift_link 100"/> -->
+ 	
+ 	<!--Operations-->
+	<node machine="pc1" name="grab" pkg="operations" type="grab" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="place" pkg="operations" type="place" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="move_to" pkg="operations" type="move_to" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="say" pkg="operations" type="say" respawn="false"></node>
+ 	<node machine="pc1" name="strech" pkg="operations" type="strech" respawn="false"></node>
+ 	<node machine="pc1" name="give" pkg="operations" type="give" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="handover_to_rose" pkg="operations" type="handover_to_rose" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="arm_driving_position" pkg="operations" type="arm_driving_position" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="arm_grabbing_position" pkg="operations" type="arm_grabbing_position" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="open_gripper" pkg="operations" type="open_gripper" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="close_gripper" pkg="operations" type="close_gripper" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="position_determinator" pkg="operations" type="position_determinator" output="screen"></node> 
+
+ 	<node machine="pc1" name="soundplay_node" pkg="sound_play" type="soundplay_node.py"></node> 
+ 	<!-- <node machine="pc1" name="wireless_watchdog_node" pkg="wireless_watchdog" type="watchdog.py"></node>  -->
+</launch>

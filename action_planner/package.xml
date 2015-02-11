@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<package>
+  <name>action_planner</name>
+  <version>0.0.0</version>
+  <description>The action_planner package</description>
+  <maintainer email="langen@robot-rose.nl">Mathijs de Langen</maintainer>
+  <license>BSD</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>arm_controller</build_depend>
+  <build_depend>rose_datamanager_api</build_depend>
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
+  <build_depend>pose_explorer</build_depend>
+  <build_depend>roscomm</build_depend>
+  <build_depend>rose_common</build_depend>
+
+  <run_depend>arm_controller</run_depend>
+  <run_depend>rose_datamanager_api</run_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>pose_explorer</run_depend>
+  <run_depend>roscomm</run_depend>
+  
+  <export>
+  </export>
+</package>
