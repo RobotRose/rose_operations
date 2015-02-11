@@ -62,7 +62,7 @@ class OperationBaseClass
 	~OperationBaseClass();
 
   protected:
-    typedef ServerMultipleClient<operations::basic_operationAction> SMC;
+    typedef ServerMultipleClient<rose_operations::basic_operationAction> SMC;
 
 	virtual void CB_serverCancel( SMC* smc );
 	virtual void CB_goalReceived( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc );
@@ -106,10 +106,10 @@ class OperationBaseClass
 
 	ParameterSucces 					parameter_succes_;
 	
-	operations::basic_operationResult 	result_;
-	std::string 						current_item_id_;
-    std::vector<std::string>			current_item_ids_;
-	std::vector<std::string>			current_parameters_ids_;
+	rose_operations::basic_operationResult 	result_;
+	std::string 							current_item_id_;
+    std::vector<std::string>				current_item_ids_;
+	std::vector<std::string>				current_parameters_ids_;
 	
 	tf::TransformListener 				tf_;
 };
