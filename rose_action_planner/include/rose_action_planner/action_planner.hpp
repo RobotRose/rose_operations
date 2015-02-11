@@ -14,6 +14,7 @@
 #define ACTION_PLANNER_HPP
 
 #include <ros/ros.h>
+
 #include <geometry_msgs/PointStamped.h>
 
 #include "action_result_message.hpp"
