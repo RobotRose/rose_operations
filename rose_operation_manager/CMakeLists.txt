@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8.3)
-project(operation_manager)
+project(rose_operation_manager)
 
 set(CMAKE_CXX_FLAGS "-std=c++0x") 
 
@@ -26,7 +26,7 @@ generate_messages( DEPENDENCIES
 catkin_package(
 	INCLUDE_DIRS 
 		include
-	#LIBRARIES operation_manager
+	LIBRARIES
 	CATKIN_DEPENDS 
 		luctor_classes 
 		operations 
@@ -40,10 +40,10 @@ catkin_package(
 
 include_directories( include ${catkin_INCLUDE_DIRS} )
 
-add_executable( operation_manager 	src/operation_manager_node.cpp
+add_executable( rose_operation_manager 	src/operation_manager_node.cpp
 									src/operation_manager.cpp
 )
 
-add_dependencies( operation_manager ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
+add_dependencies(rose_ operation_manager ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 
-target_link_libraries( operation_manager ${catkin_LIBRARIES} )
+target_link_libraries( rose_operation_manager ${catkin_LIBRARIES} )
