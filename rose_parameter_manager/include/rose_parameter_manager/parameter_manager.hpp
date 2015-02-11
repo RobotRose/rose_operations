@@ -28,7 +28,7 @@
 
 class ParameterManager
 {
-  	typedef parameter_manager::parameterAction ParameterAction;
+  	typedef rose_parameter_manager::parameterAction ParameterAction;
   	typedef ServerMultipleClient<ParameterAction> SMC;
 
   public:
@@ -39,12 +39,12 @@ class ParameterManager
   	void addClients();
 
 	void CB_serverCancel( SMC* smc );
-	void CB_serverWork( const parameter_manager::parameterGoalConstPtr& goal, SMC* smc );
+	void CB_serverWork( const rose_parameter_manager::parameterGoalConstPtr& goal, SMC* smc );
 	void sendResult(bool succes);
 
   // Custom client succes/fail
-	void CB_action_success( const actionlib::SimpleClientGoalState& state, const parameter_manager::parameterResultConstPtr& result );
-	void CB_action_fail( const actionlib::SimpleClientGoalState& state, const parameter_manager::parameterResultConstPtr& result );
+	void CB_action_success( const actionlib::SimpleClientGoalState& state, const rose_parameter_manager::parameterResultConstPtr& result );
+	void CB_action_fail( const actionlib::SimpleClientGoalState& state, const rose_parameter_manager::parameterResultConstPtr& result );
 
   	std::string 			   name_;
   	ros::NodeHandle 		   n_;

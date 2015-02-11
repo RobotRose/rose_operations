@@ -12,9 +12,6 @@
 ***********************************************************************************/
 #include "operation_base_class/operation_base_class.hpp"
 
-
- 
-
 OperationBaseClass::OperationBaseClass( std::string name, ros::NodeHandle n )
 	: name_ ( name )
 	, n_ ( n )
@@ -83,7 +80,7 @@ void OperationBaseClass::addArmClients()
 // Client action
 void OperationBaseClass::getParameter( std::string item_id, PARAMETER_REQUEST parameter, ParameterSucces parameter_succes)
 {
-	parameter_manager::parameterGoal goal;
+	rose_parameter_manager::parameterGoal goal;
 	goal.item_id 		= item_id;
 	goal.parameter 		= parameter;
 
@@ -136,14 +133,14 @@ void OperationBaseClass::CB_armVisualServoingFeedback( const arm_controller::mov
 	ROS_INFO("OperationBaseClass::CB_armVisualServoingFeedback");
 }
 
-void OperationBaseClass::CB_getParameterSuccess( const actionlib::SimpleClientGoalState& state, const parameter_manager::parameterResultConstPtr& result )
+void OperationBaseClass::CB_getParameterSuccess( const actionlib::SimpleClientGoalState& state, const rose_parameter_manager::parameterResultConstPtr& result )
 {
     ROS_INFO("OperationBaseClass::CB_getParametersuccess");
 
     parameter_succes_(current_item_id_, current_parameters_ids_ );
 }
 
-void OperationBaseClass::CB_getParameterFail( const actionlib::SimpleClientGoalState& state, const parameter_manager::parameterResultConstPtr& result )
+void OperationBaseClass::CB_getParameterFail( const actionlib::SimpleClientGoalState& state, const rose_parameter_manager::parameterResultConstPtr& result )
 {
   	ROS_INFO("OperationBaseClass::CB_getParameterfail");
 
@@ -156,7 +153,7 @@ void OperationBaseClass::CB_getParameterActive()
 	ROS_INFO("OperationBaseClass::CB_getParameteractive");
 }
 
-void OperationBaseClass::CB_getParameterFeedback( const parameter_manager::parameterFeedbackConstPtr& feedback )
+void OperationBaseClass::CB_getParameterFeedback( const rose_parameter_manager::parameterFeedbackConstPtr& feedback )
 {
 	ROS_INFO("OperationBaseClass::CB_getParameterfeedback");
 }

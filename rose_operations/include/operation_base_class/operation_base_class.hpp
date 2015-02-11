@@ -54,7 +54,7 @@
 class OperationBaseClass
 {
   public:
-  	typedef parameter_manager::parameterAction ParameterAction;
+  	typedef rose_parameter_manager::parameterAction ParameterAction;
   	typedef arm_controller::move_to_tfAction ArmVisualServoAction;
   	typedef boost::function< void (const std::string item_id, const std::vector<std::string> parameter_ids) > ParameterSucces;
 
@@ -72,10 +72,10 @@ class OperationBaseClass
     virtual void sendResult( bool succes,  std::string message );
 
 	virtual void getParameter( std::string item_id, PARAMETER_REQUEST parameter, ParameterSucces parameter_succes);
-	virtual void CB_getParameterSuccess( const actionlib::SimpleClientGoalState& state, const parameter_manager::parameterResultConstPtr& result );
-	virtual void CB_getParameterFail( const actionlib::SimpleClientGoalState& state, const parameter_manager::parameterResultConstPtr& result );
+	virtual void CB_getParameterSuccess( const actionlib::SimpleClientGoalState& state, const rose_parameter_manager::parameterResultConstPtr& result );
+	virtual void CB_getParameterFail( const actionlib::SimpleClientGoalState& state, const rose_parameter_manager::parameterResultConstPtr& result );
 	virtual void CB_getParameterActive();
-	virtual void CB_getParameterFeedback( const parameter_manager::parameterFeedbackConstPtr& feedback );
+	virtual void CB_getParameterFeedback( const rose_parameter_manager::parameterFeedbackConstPtr& feedback );
 
 	virtual void CB_armVisualServoingSuccess( const actionlib::SimpleClientGoalState& state, const arm_controller::move_to_tfResultConstPtr& result );
 	virtual void CB_armVisualServoingFail( const actionlib::SimpleClientGoalState& state, const arm_controller::move_to_tfResultConstPtr& result );

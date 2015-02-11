@@ -10,7 +10,7 @@
 *	description
 * 
 ***********************************************************************************/
-#include "rose_parameter_manager/	parameter_manager.hpp"
+#include "rose_parameter_manager/parameter_manager.hpp"
 
 ParameterManager::ParameterManager( std::string name, ros::NodeHandle n )
 	: name_ ( name )
@@ -54,14 +54,14 @@ void ParameterManager::addClients()
 }
 
 // Client callbacks
-void ParameterManager::CB_action_success( const actionlib::SimpleClientGoalState& state, const parameter_manager::parameterResultConstPtr& result )
+void ParameterManager::CB_action_success( const actionlib::SimpleClientGoalState& state, const rose_parameter_manager::parameterResultConstPtr& result )
 {
 	ROS_INFO("ParameterManager::CB_action_success");
 	sendResult( true );
 	smc_->cancelAllClients();
 }
 
-void ParameterManager::CB_action_fail( const actionlib::SimpleClientGoalState& state, const parameter_manager::parameterResultConstPtr& result )
+void ParameterManager::CB_action_fail( const actionlib::SimpleClientGoalState& state, const rose_parameter_manager::parameterResultConstPtr& result )
 {
 	ROS_INFO("ParameterManager::CB_action_fail");
 	ROS_INFO("number of busy clients: %d", smc_->getNumberOfBusyClients());
@@ -75,13 +75,13 @@ void ParameterManager::sendResult( bool succes )
 {
 	ROS_INFO("ParameterManager::sendResult::begin");
 	
-	parameter_manager::parameterResult result;
+	rose_parameter_manager::parameterResult result;
 	smc_->sendServerResult( succes, result );
 
 	ROS_INFO("ParameterManager::sendResult::end");
 }
 
-void ParameterManager::CB_serverWork( const parameter_manager::parameterGoalConstPtr& goal, SMC* smc )
+void ParameterManager::CB_serverWork( const rose_parameter_manager::parameterGoalConstPtr& goal, SMC* smc )
 {
 	ROS_INFO("ParameterManager::CB_serverWork::begin");
 	if ( smc_->hasBusyClients() )
