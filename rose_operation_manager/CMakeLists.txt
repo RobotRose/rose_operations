@@ -7,7 +7,7 @@ find_package(catkin REQUIRED
 	COMPONENTS
 	actionlib_msgs
 	luctor_classes
-	operationrose_s
+	rose_operations
 	roscomm
 	rose_action_planner
 	rose_datamanager_api
