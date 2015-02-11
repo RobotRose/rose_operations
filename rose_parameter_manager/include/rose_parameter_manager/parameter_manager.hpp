@@ -17,10 +17,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include "parameter_manager/parameterAction.h"
-#include "parameter_manager/parameterGoal.h"
-#include "parameter_manager/parameterFeedback.h"
-#include "parameter_manager/parameterResult.h"
+#include "rose_parameter_manager/parameterAction.h"
+#include "rose_parameter_manager/parameterGoal.h"
+#include "rose_parameter_manager/parameterFeedback.h"
+#include "rose_parameter_manager/parameterResult.h"
 
 #include "parameter_request_message.hpp"
 
