@@ -1,0 +1,25 @@
+<launch>
+	<!-- Do mapping argument -->
+    <arg name="mapping" default="false"/> 
+
+    <!-- Do not use machine files argument -->
+    <arg name="sim" default="false"/>
+
+    <!-- Hardware version -->
+    <arg name="hardware" default="simulation"/>
+
+ 	<!--Operations-->
+	<node machine="pc1" name="grab" pkg="operations" type="grab" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="place" pkg="operations" type="place" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="move_to" pkg="operations" type="move_to" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="say" pkg="operations" type="say" respawn="false"></node>
+ 	<node machine="pc1" name="strech" pkg="operations" type="strech" respawn="false"></node>
+ 	<node machine="pc1" name="give" pkg="operations" type="give" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="handover_to_rose" pkg="operations" type="handover_to_rose" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="arm_driving_position" pkg="operations" type="arm_driving_position" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="arm_grabbing_position" pkg="operations" type="arm_grabbing_position" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="open_gripper" pkg="operations" type="open_gripper" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="close_gripper" pkg="operations" type="close_gripper" output="screen" respawn="false"></node>
+ 	<node machine="pc1" name="position_determinator" pkg="operations" type="position_determinator" output="screen"></node> 
+
+</launch>
