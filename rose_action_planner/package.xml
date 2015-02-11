@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
-  <name>action_planner</name>
+  <name>rose_action_planner</name>
   <version>0.0.0</version>
-  <description>The action_planner package</description>
+  <description>The rose_action_planner package</description>
   <maintainer email="langen@robot-rose.nl">Mathijs de Langen</maintainer>
   <license>BSD</license>
 
