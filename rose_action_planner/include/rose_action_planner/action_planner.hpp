@@ -32,11 +32,11 @@ class ActionPlanner
     ~ActionPlanner();
 
   private:
-  	bool CB_planRecover( action_planner::recover::Request  &req,	
-						 action_planner::recover::Response &res );
+  	bool CB_planRecover( rose_action_planner::recover::Request  &req,	
+						 rose_action_planner::recover::Response &res );
 
-    void recoverGrabFromOutOfReach( action_planner::recover::Request  &req,
-                                    action_planner::recover::Response &res );
+    void recoverGrabFromOutOfReach( rose_action_planner::recover::Request  &req,
+                                    rose_action_planner::recover::Response &res );
 
   	std::string 	        name_;
   	ros::NodeHandle         n_;

@@ -24,8 +24,8 @@ ActionPlanner::~ActionPlanner()
 	
 }
 
-bool ActionPlanner::CB_planRecover( action_planner::recover::Request  &req,	
-									action_planner::recover::Response &res)
+bool ActionPlanner::CB_planRecover( rose_action_planner::recover::Request  &req,	
+									rose_action_planner::recover::Response &res)
 {
 	switch ( req.return_code )
 	{
@@ -38,8 +38,8 @@ bool ActionPlanner::CB_planRecover( action_planner::recover::Request  &req,
 }
 
 
-void ActionPlanner::recoverGrabFromOutOfReach( action_planner::recover::Request  &req,
-											   action_planner::recover::Response &res )
+void ActionPlanner::recoverGrabFromOutOfReach( rose_action_planner::recover::Request  &req,
+											   rose_action_planner::recover::Response &res )
 {
 	if ( req.item_ids.size() != 1 )
 	 	ROS_ERROR("To many item ids (>1)");
