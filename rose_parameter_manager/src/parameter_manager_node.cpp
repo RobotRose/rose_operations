@@ -10,7 +10,7 @@
 *	description
 * 
 ***********************************************************************************/
-#include "parameter_manager_node.hpp"
+#include "rose_parameter_manager/parameter_manager_node.hpp"
 
 int main( int argc, char **argv )
 {

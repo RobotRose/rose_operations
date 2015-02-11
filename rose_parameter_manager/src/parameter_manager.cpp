@@ -10,7 +10,7 @@
 *	description
 * 
 ***********************************************************************************/
-#include "parameter_manager.hpp"
+#include "rose_parameter_manager/	parameter_manager.hpp"
 
 ParameterManager::ParameterManager( std::string name, ros::NodeHandle n )
 	: name_ ( name )
