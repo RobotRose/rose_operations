@@ -259,7 +259,7 @@ void ManipulationBaseClass::removeBoundingBoxOfItemFromDatabase( Item item )
 const bool ManipulationBaseClass::lookAt( const std::string frame_id, const bool keep_tracking)
 {
 	operator_gui_->message("Looking towards item");
-    rose20_gaze_controller::LookAtGoal goal;
+    rose_gaze_controller::LookAtGoal goal;
 
     goal.target_point.header.frame_id   = frame_id;
     goal.target_point.point.x           = 0;

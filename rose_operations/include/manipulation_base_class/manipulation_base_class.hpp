@@ -19,8 +19,8 @@
 #include "operation_base_class/operation_base_class.hpp"
 #include "tf_helper/tf_helper.hpp"
 
-#include "rose20_gaze_controller/LookAtAction.h" //! @todo MdL: Coding guidelines (lower case filenames).
-#include "rose20_gaze_controller/LookAtGoal.h"   //! @todo MdL: Coding guidelines (lower case filenames).
+#include "rose_gaze_controller/LookAtAction.h" //! @todo MdL: Coding guidelines (lower case filenames).
+#include "rose_gaze_controller/LookAtGoal.h"   //! @todo MdL: Coding guidelines (lower case filenames).
 #include "arm_controller/toggle_visual_correction.h"
 
 using geometry_msgs::PoseStamped;
@@ -39,7 +39,7 @@ using std::map;
 class ManipulationBaseClass : public OperationBaseClass
 {
   public:
-    typedef actionlib::SimpleActionClient<rose20_gaze_controller::LookAtAction> GazeClient; //! @todo MdL: Make SMC.
+    typedef actionlib::SimpleActionClient<rose_gaze_controller::LookAtAction> GazeClient; //! @todo MdL: Make SMC.
     typedef ServerMultipleClient<arm_controller::move_to_tfAction> ArmVisualServoing;
 
     /**
