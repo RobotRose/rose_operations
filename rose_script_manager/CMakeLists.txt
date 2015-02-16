@@ -4,14 +4,15 @@ project(rose_script_manager)
 set(CMAKE_CXX_FLAGS "-std=c++0x") 
 
 find_package(catkin REQUIRED 
-	COMPONENTS 
+    COMPONENTS 
     actionlib 
     actionlib_msgs 
     genmsg 
     message_generation 
     roscomm
-    rospy 
     roscpp 
+    rose_ui_item_collector 
+    rospy 
     std_msgs
 )
 
@@ -33,6 +34,7 @@ catkin_package(
     CATKIN_DEPENDS 
         actionlib
         actionlib_msgs
+        rose_ui_item_collector
         std_msgs
     DEPENDS 
         message_runtime

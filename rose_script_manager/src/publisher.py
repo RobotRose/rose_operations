@@ -2,7 +2,7 @@
 import rospy
 import actionlib
 
-from gui_item_collector.msg import *
+from rose_ui_item_collector.msg import *
 from rose_operation_manager.msg import *
 from roscomm.msg import *
 from std_msgs.msg import String
