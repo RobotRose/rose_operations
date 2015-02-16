@@ -28,7 +28,7 @@ ManipulationBaseClass::~ManipulationBaseClass()
 bool ManipulationBaseClass::visualServoingAction ( const arm_controller::move_to_tfGoal goal )
 {
 	smc_->sendGoal<arm_controller::move_to_tfAction>(goal, "arm_visual_servoing");
-	if (not smc_->waitForResult(ros::Duration(120.0)))
+	if (not smc_->waitForResult("arm_visual_servoing", ros::Duration(120.0)))
 		return false;
 
 	arm_controller::move_to_tfResultConstPtr result;
@@ -60,7 +60,7 @@ bool ManipulationBaseClass::armAction( const ArmController::Arms arm, const arm_
     ROS_INFO_NAMED(ROS_NAME, "Sending goal action of type %d", goal.required_action);
 
 	smc_->sendGoal<arm_controller::manipulateAction>(goal, arm_controller_helper_->getClientFor(arm));
-	if (not smc_->waitForResult(ros::Duration(0.0)))
+	if (not smc_->waitForResult(arm_controller_helper_->getClientFor(arm), ros::Duration(0.0)))
 		return false;
 
 	arm_controller::manipulateResultConstPtr result;
