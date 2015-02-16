@@ -39,7 +39,7 @@ void ArmGrabbingPosition::CB_goalReceived( const rose_operations::basic_operatio
 bool ArmGrabbingPosition::armAction( const ArmController::Arms& arm, const arm_controller::manipulateGoal& goal )
 {
     smc_->sendGoal<arm_controller::manipulateAction>(goal, arm_controller_helper_->getClientFor(arm));
-    if (not smc_->waitForResult(ros::Duration(40.0)))
+    if (not smc_->waitForResult(arm_controller_helper_->getClientFor(arm), ros::Duration(40.0)))
         return false;
 
     arm_controller::manipulateResultConstPtr result;

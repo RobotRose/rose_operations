@@ -155,7 +155,7 @@ void MoveTo::moveToLocation( const Waypoint waypoint )
 
 	smc_->sendGoal<move_base_msgs::MoveBaseAction>(goal, "move_base_smc");
 
-	smc_->waitForResult(ros::Duration(0.0));
+	smc_->waitForResult("move_base_smc", ros::Duration(0.0));
 
 	if ( waypoint.is_temp() )
 		datamanager_->deleteObject<Waypoint>(waypoint);
