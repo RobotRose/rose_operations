@@ -8,8 +8,8 @@ find_package(catkin REQUIRED
 	arm_controller
 	geometry_msgs
 	luctor_classes	
+	operator_messaging
 	roscomm
-	rose20_platform
 	rose_datamanager_api
 	rose_transformations
 	server_multiple_client
@@ -33,11 +33,15 @@ catkin_package(
     LIBRARIES 
     	operation_base_class 
 	CATKIN_DEPENDS 
-		arm_controller 
-		rose_datamanager_api 
-		luctor_classes 
-		roscomm 
-		rose20_platform 
+		actionlib 
+		actionlib_msgs 
+		arm_controller
+		geometry_msgs
+		luctor_classes	
+		operator_messaging
+		roscomm
+		rose_datamanager_api
+		rose_transformations
 		server_multiple_client
 	DEPENDS 
 		actionlib 
