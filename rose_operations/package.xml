@@ -12,26 +12,26 @@
   <build_depend>actionlib</build_depend>
   <build_depend>actionlib_msgs</build_depend>
   <build_depend>arm_controller</build_depend>
-  <build_depend>rose_datamanager_api</build_depend>
   <build_depend>geometry_msgs</build_depend>
   <build_depend>luctor_classes</build_depend>
+  <build_depend>operator_messaging</build_depend>
   <build_depend>roscomm</build_depend>
   <build_depend>rose_common</build_depend>
-  <build_depend>rose20_platform</build_depend>
-  <build_depend>server_multiple_client</build_depend>
+  <build_depend>rose_datamanager_api</build_depend>
   <build_depend>rose_transformations</build_depend>
+  <build_depend>server_multiple_client</build_depend>
 
   <run_depend>actionlib</run_depend>
   <run_depend>actionlib_msgs</run_depend>
   <run_depend>arm_controller</run_depend>
-  <run_depend>rose_datamanager_api</run_depend>
   <run_depend>geometry_msgs</run_depend>
   <run_depend>luctor_classes</run_depend>
+  <run_depend>operator_messaging</run_depend>
   <run_depend>roscomm</run_depend>
   <run_depend>rose_common</run_depend>
-  <run_depend>rose20_platform</run_depend>
-  <run_depend>server_multiple_client</run_depend>
+  <run_depend>rose_datamanager_api</run_depend>
   <run_depend>rose_transformations</run_depend>
+  <run_depend>server_multiple_client</run_depend>
 
   <export>
    
