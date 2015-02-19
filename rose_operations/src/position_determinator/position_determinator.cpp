@@ -16,7 +16,7 @@
 PositionDeterminator::PositionDeterminator( std::string name, ros::NodeHandle n )
 	: OperationBaseClass (name, n)
 {
-	reachable_position_service_ = n_.serviceClient<pose_explorer::reachable_poses>("/pose_explorer/calculate_reachability");
+	reachable_position_service_ = n_.serviceClient<rose_pose_explorer::reachable_poses>("/pose_explorer/calculate_reachability");
 
 	best_pose_pub_ 				    = n_.advertise<visualization_msgs::Marker>( name_  + "/best_pose", 1);
 	best_pose_corrected_pub_        = n_.advertise<visualization_msgs::Marker>( name_  + "/best_pose_corrected", 1);
@@ -299,7 +299,7 @@ bool PositionDeterminator::determinePositionForManipulation( PointCloud& target_
 		ROS_ERROR("Could not get filtered points(2)");
 
 	// Get new locations for the base
-	pose_explorer::reachable_poses reachability_msg;
+	rose_pose_explorer::reachable_poses reachability_msg;
 
 	reachability_msg.request.target_points  = target_points;
 	reachability_msg.request.allowed_points = allowed_points;
