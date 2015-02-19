@@ -40,8 +40,9 @@ catkin_package(
 
 include_directories( include ${catkin_INCLUDE_DIRS} )
 
-add_executable( rose_operation_manager 	src/operation_manager_node.cpp
-									src/operation_manager.cpp
+add_executable( rose_operation_manager 	
+		src/operation_manager_node.cpp
+		src/operation_manager.cpp
 )
 
 add_dependencies(rose_operation_manager ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)

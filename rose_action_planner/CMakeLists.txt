@@ -12,7 +12,7 @@ find_package(catkin REQUIRED
 	rose_datamanager_api
 	geometry_msgs
 	std_msgs
-	pose_explorer
+	rose_pose_explorer
 	roscomm
 )
 
@@ -36,7 +36,7 @@ catkin_package(
 	CATKIN_DEPENDS 
 		std_msgs 
 		arm_controller 
-		pose_explorer 
+		rose_pose_explorer 
 		geometry_msgs
 	DEPENDS 
 		system_lib
