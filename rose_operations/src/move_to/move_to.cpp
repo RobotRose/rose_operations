@@ -153,9 +153,16 @@ void MoveTo::moveToLocation( const Waypoint waypoint )
 
 	goal.target_pose = waypoint_pose;
 
-	smc_->sendGoal<move_base_msgs::MoveBaseAction>(goal, "move_base_smc");
-
-	smc_->waitForResult("move_base_smc", ros::Duration(0.0));
+	if( not smc_->sendGoal<move_base_msgs::MoveBaseAction>(goal, "move_base_smc", 1.0) )
+	{
+		ROS_INFO("Could not send goal to move_base_smc, aborting moveto operation.");
+		smc_->abort();
+	}
+	else
+	{
+		ROS_INFO("Goal send goal to move_base_smc, waiting for result.");
+		smc_->waitForResult("move_base_smc", ros::Duration(0.0));
+	}
 
 	if ( waypoint.is_temp() )
 		datamanager_->deleteObject<Waypoint>(waypoint);
