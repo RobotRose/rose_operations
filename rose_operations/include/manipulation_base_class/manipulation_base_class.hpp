@@ -15,13 +15,11 @@
 
 #include <unistd.h> //sleep
 
-#include "arm_controller_helper.hpp"
 #include "operation_base_class/operation_base_class.hpp"
 #include "tf_helper/tf_helper.hpp"
 
 #include "rose_gaze_controller/LookAtAction.h" //! @todo MdL: Coding guidelines (lower case filenames).
 #include "rose_gaze_controller/LookAtGoal.h"   //! @todo MdL: Coding guidelines (lower case filenames).
-#include "arm_controller/toggle_visual_correction.h"
 
 using geometry_msgs::PoseStamped;
 using geometry_msgs::Point;
@@ -40,7 +38,7 @@ class ManipulationBaseClass : public OperationBaseClass
 {
   public:
     typedef actionlib::SimpleActionClient<rose_gaze_controller::LookAtAction> GazeClient; //! @todo MdL: Make SMC.
-    typedef ServerMultipleClient<arm_controller::move_to_tfAction> ArmVisualServoing;
+    typedef ServerMultipleClient<rose_arm_controller_msgs::move_to_tfAction> ArmVisualServoing;
 
     /**
      * Constructor
@@ -103,7 +101,7 @@ class ManipulationBaseClass : public OperationBaseClass
      * @param  goal The goal for the visual servoing node
      * @return      If the action was successful
      */
-    bool visualServoingAction ( const arm_controller::move_to_tfGoal goal );
+    bool visualServoingAction ( const rose_arm_controller_msgs::move_to_tfGoal goal );
 
     /**
      * Creates transform with name and pose_stamped
