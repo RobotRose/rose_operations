@@ -94,7 +94,7 @@ class OperationBaseClass
 	virtual void CB_getParameterFail( const actionlib::SimpleClientGoalState& state, const rose_parameter_manager::parameterResultConstPtr& result );
 	virtual void CB_getParameterActive();
 	virtual void CB_getParameterFeedback( const rose_parameter_manager::parameterFeedbackConstPtr& feedback );
-ad
+
 	virtual void executeItemAction( const std::string id, const std::vector<std::string> parameters = std::vector<std::string>() );
     virtual void executeMultiItemAction( const std::vector<std::string> item_ids, const std::vector<std::string> parameters = std::vector<std::string>() );
     virtual void executePersonAction( const std::string id, const std::vector<std::string> parameters = std::vector<std::string>() );
@@ -106,7 +106,6 @@ ad
 	std::string 						name_;
 	ros::NodeHandle 					n_;
 
-	ArmControllerHelper*				arm_controller_helper_;
 	DatamanagerAPI*						datamanager_;
 	SMC*								smc_;
     OperatorMessaging*                  operator_gui_;
