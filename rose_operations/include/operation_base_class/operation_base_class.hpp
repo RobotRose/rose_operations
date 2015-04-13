@@ -21,14 +21,32 @@
 
 #include "action_result_message.hpp"
 
-#include "arm_controller_helper.hpp"
-
 #include "rose_datamanager_api/datamanager_api.hpp"
 
-#include "arm_controller/move_to_tfAction.h"
-#include "arm_controller/move_to_tfGoal.h"
-#include "arm_controller/move_to_tfResult.h"
-#include "arm_controller/move_to_tfFeedback.h"
+#include "rose_arm_controller_msgs/move_to_tfAction.h"
+#include "rose_arm_controller_msgs/move_to_tfGoal.h"
+#include "rose_arm_controller_msgs/move_to_tfResult.h"
+#include "rose_arm_controller_msgs/move_to_tfFeedback.h"
+
+#include "rose_arm_controller_msgs/set_positionAction.h"
+#include "rose_arm_controller_msgs/set_positionGoal.h"
+#include "rose_arm_controller_msgs/set_positionResult.h"
+#include "rose_arm_controller_msgs/set_positionFeedback.h"
+
+#include "rose_arm_controller_msgs/set_gripper_widthAction.h"
+#include "rose_arm_controller_msgs/set_gripper_widthGoal.h"
+#include "rose_arm_controller_msgs/set_gripper_widthResult.h"
+#include "rose_arm_controller_msgs/set_gripper_widthFeedback.h"
+
+#include "rose_arm_controller_msgs/set_velocityAction.h"
+#include "rose_arm_controller_msgs/set_velocityGoal.h"
+#include "rose_arm_controller_msgs/set_velocityResult.h"
+#include "rose_arm_controller_msgs/set_velocityFeedback.h"
+
+#include "rose_arm_controller_msgs/set_wrenchAction.h"
+#include "rose_arm_controller_msgs/set_wrenchGoal.h"
+#include "rose_arm_controller_msgs/set_wrenchResult.h"
+#include "rose_arm_controller_msgs/set_wrenchFeedback.h"
 
 #include "rose_operations/basic_operationAction.h"
 #include "rose_operations/basic_operationGoal.h"
@@ -55,7 +73,7 @@ class OperationBaseClass
 {
   public:
   	typedef rose_parameter_manager::parameterAction ParameterAction;
-  	typedef arm_controller::move_to_tfAction ArmVisualServoAction;
+  	typedef rose_arm_controller_msgs::move_to_tfAction ArmVisualServoAction;
   	typedef boost::function< void (const std::string item_id, const std::vector<std::string> parameter_ids) > ParameterSucces;
 
 	OperationBaseClass( std::string name, ros::NodeHandle n );
@@ -77,10 +95,10 @@ class OperationBaseClass
 	virtual void CB_getParameterActive();
 	virtual void CB_getParameterFeedback( const rose_parameter_manager::parameterFeedbackConstPtr& feedback );
 
-	virtual void CB_armVisualServoingSuccess( const actionlib::SimpleClientGoalState& state, const arm_controller::move_to_tfResultConstPtr& result );
-	virtual void CB_armVisualServoingFail( const actionlib::SimpleClientGoalState& state, const arm_controller::move_to_tfResultConstPtr& result );
+	virtual void CB_armVisualServoingSuccess( const actionlib::SimpleClientGoalState& state, const rose_arm_controller_msgs::move_to_tfResultConstPtr& result );
+	virtual void CB_armVisualServoingFail( const actionlib::SimpleClientGoalState& state, const rose_arm_controller_msgs::move_to_tfResultConstPtr& result );
 	virtual void CB_armVisualServoingActive();
-	virtual void CB_armVisualServoingFeedback( const arm_controller::move_to_tfFeedbackConstPtr& feedback );
+	virtual void CB_armVisualServoingFeedback( const rose_arm_controller_msgs::move_to_tfFeedbackConstPtr& feedback );
 
 	virtual void CB_armActionSuccess( const actionlib::SimpleClientGoalState& state, const arm_controller::manipulateResultConstPtr& result );
 	virtual void CB_armActionFail( const actionlib::SimpleClientGoalState& state, const arm_controller::manipulateResultConstPtr& result );
