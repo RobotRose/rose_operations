@@ -23,7 +23,6 @@ OperationBaseClass::OperationBaseClass( std::string name, ros::NodeHandle n )
 		
 	datamanager_ 			= new DatamanagerAPI();
 
-	arm_controller_helper_ 	= new ArmControllerHelper();
 	addArmClients();
 
 	// Paramater manager client
