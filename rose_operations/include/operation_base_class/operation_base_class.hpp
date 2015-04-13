@@ -94,23 +94,12 @@ class OperationBaseClass
 	virtual void CB_getParameterFail( const actionlib::SimpleClientGoalState& state, const rose_parameter_manager::parameterResultConstPtr& result );
 	virtual void CB_getParameterActive();
 	virtual void CB_getParameterFeedback( const rose_parameter_manager::parameterFeedbackConstPtr& feedback );
-
-	virtual void CB_armVisualServoingSuccess( const actionlib::SimpleClientGoalState& state, const rose_arm_controller_msgs::move_to_tfResultConstPtr& result );
-	virtual void CB_armVisualServoingFail( const actionlib::SimpleClientGoalState& state, const rose_arm_controller_msgs::move_to_tfResultConstPtr& result );
-	virtual void CB_armVisualServoingActive();
-	virtual void CB_armVisualServoingFeedback( const rose_arm_controller_msgs::move_to_tfFeedbackConstPtr& feedback );
-
-	virtual void CB_armActionSuccess( const actionlib::SimpleClientGoalState& state, const arm_controller::manipulateResultConstPtr& result );
-	virtual void CB_armActionFail( const actionlib::SimpleClientGoalState& state, const arm_controller::manipulateResultConstPtr& result );
-	virtual void CB_armActionActive();
-	virtual void CB_armActionFeedback( const arm_controller::manipulateFeedbackConstPtr& feedback );
-
+ad
 	virtual void executeItemAction( const std::string id, const std::vector<std::string> parameters = std::vector<std::string>() );
     virtual void executeMultiItemAction( const std::vector<std::string> item_ids, const std::vector<std::string> parameters = std::vector<std::string>() );
     virtual void executePersonAction( const std::string id, const std::vector<std::string> parameters = std::vector<std::string>() );
     virtual void executeWaypointAction( const std::string id, const std::vector<std::string> parameters = std::vector<std::string>() );
 
-    void addArmClients();
     void addParameterManagerClient();
 	void addArmVisualServoingClient();
 

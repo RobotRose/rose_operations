@@ -65,18 +65,6 @@ void OperationBaseClass::addArmVisualServoingClient()
 	   	boost::bind(&OperationBaseClass::CB_armVisualServoingFeedback, this, _1));
 }
 
-void OperationBaseClass::addArmClients()
-{
-	std::vector<ArmController::Arms> arms = arm_controller_helper_->getArms();
-
-	for( auto& arm : arms )
-		smc_->addClient<arm_controller::manipulateAction>(arm_controller_helper_->getClientFor(arm), 
-			boost::bind(&OperationBaseClass::CB_armActionSuccess, this, _1, _2),
-			boost::bind(&OperationBaseClass::CB_armActionFail, this, _1, _2),
-			boost::bind(&OperationBaseClass::CB_armActionActive, this),
-	   		boost::bind(&OperationBaseClass::CB_armActionFeedback, this, _1));
-}
-
 // Client action
 void OperationBaseClass::getParameter( std::string item_id, PARAMETER_REQUEST parameter, ParameterSucces parameter_succes)
 {
@@ -89,48 +77,6 @@ void OperationBaseClass::getParameter( std::string item_id, PARAMETER_REQUEST pa
 	smc_->sendGoal<ParameterAction>(goal, "parameter_manager");
 
 	parameter_succes_ 	= parameter_succes;
-}
-
-// Client callbacks
-void OperationBaseClass::CB_armActionSuccess( const actionlib::SimpleClientGoalState& state, const arm_controller::manipulateResultConstPtr& result )
-{
-    ROS_INFO("OperationBaseClass::CB_armActionSuccess");
-}
-
-void OperationBaseClass::CB_armActionFail( const actionlib::SimpleClientGoalState& state, const arm_controller::manipulateResultConstPtr& result )
-{
-  	ROS_INFO("OperationBaseClass::CB_armActionFail");
-}
-
-void OperationBaseClass::CB_armActionActive()
-{
-	ROS_INFO("OperationBaseClass::CB_armActionActive");
-}
-
-void OperationBaseClass::CB_armActionFeedback( const arm_controller::manipulateFeedbackConstPtr& feedback )
-{
-	ROS_INFO("OperationBaseClass::CB_armActionFeedback");
-}
-
-// Client callbacks
-void OperationBaseClass::CB_armVisualServoingSuccess( const actionlib::SimpleClientGoalState& state, const arm_controller::move_to_tfResultConstPtr& result )
-{
-    ROS_INFO("OperationBaseClass::CB_armVisualServoingSuccess");
-}
-
-void OperationBaseClass::CB_armVisualServoingFail( const actionlib::SimpleClientGoalState& state, const arm_controller::move_to_tfResultConstPtr& result )
-{
-  	ROS_INFO("OperationBaseClass::CB_armVisualServoingFail");
-}
-
-void OperationBaseClass::CB_armVisualServoingActive()
-{
-	ROS_INFO("OperationBaseClass::CB_armVisualServoingActive");
-}
-
-void OperationBaseClass::CB_armVisualServoingFeedback( const arm_controller::move_to_tfFeedbackConstPtr& feedback )
-{
-	ROS_INFO("OperationBaseClass::CB_armVisualServoingFeedback");
 }
 
 void OperationBaseClass::CB_getParameterSuccess( const actionlib::SimpleClientGoalState& state, const rose_parameter_manager::parameterResultConstPtr& result )
