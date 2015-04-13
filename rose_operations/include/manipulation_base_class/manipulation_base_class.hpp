@@ -96,10 +96,8 @@ class ManipulationBaseClass : public OperationBaseClass
     const bool lookAt( const std::string frame_id, const bool keep_tracking=false);
 
     GazeClient*         gaze_client_;               //!< Client to look at a specific point
-    ArmVisualServoing*  arm_visual_servoing_;       //!< The visual servoing server
+    // ArmVisualServoing*  arm_visual_servoing_;       //!< The visual servoing server
 
-    ros::ServiceClient  toggle_visual_correction_service_; //!< Service to call to toggle visual correction (not needed/used anymore)
-    ros::ServiceClient  reset_visual_correction_service_;  //!< Service to call to reset  visual correction (not needed/used anymore) 
 
     map<std::string, TFHelper*>   transforms_;      //!< All transforms stored by this class
 
