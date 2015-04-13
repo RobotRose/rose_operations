@@ -75,13 +75,6 @@ add_executable( arm_grabbing_position 	${PROJECT_SOURCE_DIR}/src/arm_grabbing_po
 add_dependencies( arm_grabbing_position 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 target_link_libraries( arm_grabbing_position operation_base_class ${catkin_LIBRARIES})
 
-# strech
-add_executable( strech 	${PROJECT_SOURCE_DIR}/src/strech/strech_node.cpp
-						${PROJECT_SOURCE_DIR}/src/strech/strech.cpp
-)
-add_dependencies( strech 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries( strech operation_base_class ${catkin_LIBRARIES})
-
 # grab
 add_executable( grab 	${PROJECT_SOURCE_DIR}/src/grab/grab_node.cpp
 						${PROJECT_SOURCE_DIR}/src/grab/grab.cpp
@@ -123,20 +116,6 @@ add_executable( say 	${PROJECT_SOURCE_DIR}/src/say/say_node.cpp
 	)
 add_dependencies( say 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 target_link_libraries( say operation_base_class ${catkin_LIBRARIES} )
-
-# open_gripper
-add_executable( open_gripper 	${PROJECT_SOURCE_DIR}/src/open_gripper/open_gripper_node.cpp
-							${PROJECT_SOURCE_DIR}/src/open_gripper/open_gripper.cpp
-	)
-add_dependencies( open_gripper 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries( open_gripper operation_base_class ${catkin_LIBRARIES} )
-
-#close_gripper
-add_executable( close_gripper 	${PROJECT_SOURCE_DIR}/src/close_gripper/close_gripper_node.cpp
-							${PROJECT_SOURCE_DIR}/src/close_gripper/close_gripper.cpp
-	)
-add_dependencies( close_gripper 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries( close_gripper operation_base_class ${catkin_LIBRARIES} )
 
 #position_determinator
 add_executable( position_determinator 	${PROJECT_SOURCE_DIR}/src/position_determinator/position_determinator_node.cpp
