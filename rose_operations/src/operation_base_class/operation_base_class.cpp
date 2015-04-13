@@ -23,13 +23,8 @@ OperationBaseClass::OperationBaseClass( std::string name, ros::NodeHandle n )
 		
 	datamanager_ 			= new DatamanagerAPI();
 
-	addArmClients();
-
 	// Paramater manager client
 	addParameterManagerClient();
-
-	// Visual servoing client
-	addArmVisualServoingClient();
 
 	// Standard result
 	result_.return_code = NODE_NOT_IMPLEMENTED_ERROR;
@@ -53,15 +48,6 @@ void OperationBaseClass::addParameterManagerClient()
 	   	boost::bind(&OperationBaseClass::CB_getParameterFail, this, _1, _2),
 	   	boost::bind(&OperationBaseClass::CB_getParameterActive, this),
 	   	boost::bind(&OperationBaseClass::CB_getParameterFeedback, this, _1));
-}
-
-void OperationBaseClass::addArmVisualServoingClient()
-{
-	smc_->addClient<ArmVisualServoAction>("arm_visual_servoing",
-		boost::bind(&OperationBaseClass::CB_armVisualServoingSuccess, this, _1, _2),
-	    boost::bind(&OperationBaseClass::CB_armVisualServoingFail, this, _1, _2),
-	   	boost::bind(&OperationBaseClass::CB_armVisualServoingActive, this),
-	   	boost::bind(&OperationBaseClass::CB_armVisualServoingFeedback, this, _1));
 }
 
 // Client action

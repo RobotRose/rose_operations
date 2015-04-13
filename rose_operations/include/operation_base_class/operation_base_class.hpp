@@ -73,7 +73,6 @@ class OperationBaseClass
 {
   public:
   	typedef rose_parameter_manager::parameterAction ParameterAction;
-  	typedef rose_arm_controller_msgs::move_to_tfAction ArmVisualServoAction;
   	typedef boost::function< void (const std::string item_id, const std::vector<std::string> parameter_ids) > ParameterSucces;
 
 	OperationBaseClass( std::string name, ros::NodeHandle n );
@@ -101,7 +100,6 @@ class OperationBaseClass
     virtual void executeWaypointAction( const std::string id, const std::vector<std::string> parameters = std::vector<std::string>() );
 
     void addParameterManagerClient();
-	void addArmVisualServoingClient();
 
 	std::string 						name_;
 	ros::NodeHandle 					n_;

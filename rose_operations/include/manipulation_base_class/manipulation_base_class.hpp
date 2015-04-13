@@ -38,7 +38,7 @@ class ManipulationBaseClass : public OperationBaseClass
 {
   public:
     typedef actionlib::SimpleActionClient<rose_gaze_controller::LookAtAction> GazeClient; //! @todo MdL: Make SMC.
-    typedef ServerMultipleClient<rose_arm_controller_msgs::move_to_tfAction> ArmVisualServoing;
+    // typedef ServerMultipleClient<rose_arm_controller_msgs::move_to_tfAction> ArmVisualServoing;
 
     /**
      * Constructor
@@ -58,18 +58,12 @@ class ManipulationBaseClass : public OperationBaseClass
 
   protected:
     /**
-     * Creates a table pose just below the bounding box of an item
-     * @param bb The bounding box
-     */
-    void createTablePose( const BoundingBox& bb );
-
-    /**
      * Sends a visual servoing goal to the visual servoing node. Waits and retrieves the result. It also sends
      * an aborted message as a server when the goal has failed. 
      * @param  goal The goal for the visual servoing node
      * @return      If the action was successful
      */
-    bool visualServoingAction ( const rose_arm_controller_msgs::move_to_tfGoal goal );
+    // bool visualServoingAction ( const rose_arm_controller_msgs::move_to_tfGoal goal );
 
     /**
      * Creates transform with name and pose_stamped
@@ -89,14 +83,6 @@ class ManipulationBaseClass : public OperationBaseClass
      * @param name Name of the transform
      */
     void removeTransform( const std::string name );
-
-    /**
-     * Gets the table pose specifically for item
-     * @param  item The table pose for item
-     * @param  pose The pose to retrieve
-     * @return      Whether of not this function was successful
-     */
-    bool getTablePose( Item item, PoseStamped& pose );
 
     void removeBoundingBoxOfItemFromDatabase( Item item );
 

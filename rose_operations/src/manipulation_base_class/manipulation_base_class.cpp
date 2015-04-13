@@ -14,45 +14,12 @@ ManipulationBaseClass::ManipulationBaseClass( std::string name, ros::NodeHandle 
 {
 	startOperation();
 
-	toggle_visual_correction_service_ = n_.serviceClient<arm_controller::toggle_visual_correction>("/arms/toggle_visual_correction");
-	reset_visual_correction_service_  = n_.serviceClient<arm_controller::reset_visual_correction>("/arms/reset_visual_correction");
-
 	gaze_client_ = new GazeClient("gaze_controller", true); 
 }
 
 ManipulationBaseClass::~ManipulationBaseClass()
 {
 	
-}
-
-bool ManipulationBaseClass::visualServoingAction ( const arm_controller::move_to_tfGoal goal )
-{
-	smc_->sendGoal<arm_controller::move_to_tfAction>(goal, "arm_visual_servoing");
-	if (not smc_->waitForResult("arm_visual_servoing", ros::Duration(120.0)))
-		return false;
-
-	arm_controller::move_to_tfResultConstPtr result;
-
-	try // result can be NULL
-	{
-		//! @todo MdL: Still generates segfault.
-		result 				= smc_->getResultLastestClient<arm_controller::move_to_tfAction>();
-		result_.return_code = result->return_code;
-	}
-	catch(...) //! @todo MdL: Add correct catch.
-	{
-		result_.return_code = ARM_COMMUNICATION_ERROR;
-		// sendResultAndCleanup(false, item);
-		return false;
-	}
-
-	if ( result_.return_code != ACTION_RESULT::SUCCESS )
-	{
-		// sendResultAndCleanup(false, item);
-		return false;
-	}
-	else
-		return true;
 }
 
 void ManipulationBaseClass::createTransform( const std::string name, const PoseStamped pose_stamped )
