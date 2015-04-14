@@ -33,6 +33,7 @@ catkin_package(
 		include
     LIBRARIES 
     	operation_base_class 
+    	manipulation_base_class
 	CATKIN_DEPENDS 
 		actionlib 
 		actionlib_msgs 
@@ -61,21 +62,26 @@ add_dependencies(operation_base_class ${PROJECT_NAME}_generate_messages_cpp)
 # base class for manipulations
 add_library(manipulation_base_class ${PROJECT_SOURCE_DIR}/src/manipulation_base_class/manipulation_base_class.cpp )
 target_link_libraries(manipulation_base_class ${catkin_LIBRARIES})
-add_dependencies(manipulation_base_class ${PROJECT_NAME}_generate_messages_cpp)
+add_dependencies(manipulation_base_class operation_base_class ${PROJECT_NAME}_generate_messages_cpp)
+
+# base class for arm poses
+add_library(arm_pose_base_class ${PROJECT_SOURCE_DIR}/src/arm_pose_base_class/arm_pose_base.cpp )
+target_link_libraries(arm_pose_base_class operation_base_class ${catkin_LIBRARIES})
+add_dependencies(arm_pose_base_class operation_base_class ${PROJECT_NAME}_generate_messages_cpp)
 
 # arm driving position
 add_executable( arm_driving_position 	${PROJECT_SOURCE_DIR}/src/arm_driving_position/arm_driving_position_node.cpp
 										${PROJECT_SOURCE_DIR}/src/arm_driving_position/arm_driving_position.cpp
 )
-add_dependencies( arm_driving_position 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries( arm_driving_position operation_base_class ${catkin_LIBRARIES})
+target_link_libraries( arm_driving_position arm_pose_base_class ${catkin_LIBRARIES})
+add_dependencies( arm_driving_position arm_pose_base_class ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 
 # arm grabbing position
 add_executable( arm_grabbing_position 	${PROJECT_SOURCE_DIR}/src/arm_grabbing_position/arm_grabbing_position_node.cpp
 										${PROJECT_SOURCE_DIR}/src/arm_grabbing_position/arm_grabbing_position.cpp
 )
-add_dependencies( arm_grabbing_position 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries( arm_grabbing_position operation_base_class ${catkin_LIBRARIES})
+target_link_libraries( arm_grabbing_position arm_pose_base_class ${catkin_LIBRARIES})
+add_dependencies( arm_grabbing_position arm_pose_base_class ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 
 # grab
 # add_executable( grab 	${PROJECT_SOURCE_DIR}/src/grab/grab_node.cpp
@@ -102,26 +108,28 @@ target_link_libraries( arm_grabbing_position operation_base_class ${catkin_LIBRA
 add_executable( handover_to_rose 	${PROJECT_SOURCE_DIR}/src/handover_to_rose/handover_to_rose_node.cpp
 						${PROJECT_SOURCE_DIR}/src/handover_to_rose/handover_to_rose.cpp
 )
-add_dependencies( handover_to_rose 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries( handover_to_rose operation_base_class ${catkin_LIBRARIES})
+target_link_libraries( handover_to_rose arm_pose_base_class ${catkin_LIBRARIES})
+add_dependencies( handover_to_rose 	arm_pose_base_class ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
+
+
 
 # move_to
 add_executable( move_to 	${PROJECT_SOURCE_DIR}/src/move_to/move_to_node.cpp
 							${PROJECT_SOURCE_DIR}/src/move_to/move_to.cpp
 	)
-add_dependencies( move_to 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 target_link_libraries( move_to operation_base_class ${catkin_LIBRARIES} )
+add_dependencies( move_to 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 
 # say
 add_executable( say 	${PROJECT_SOURCE_DIR}/src/say/say_node.cpp
 							${PROJECT_SOURCE_DIR}/src/say/say.cpp
 	)
-add_dependencies( say 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 target_link_libraries( say operation_base_class ${catkin_LIBRARIES} )
+add_dependencies( say 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 
 # position_determinator
 add_executable( position_determinator 	${PROJECT_SOURCE_DIR}/src/position_determinator/position_determinator_node.cpp
 							${PROJECT_SOURCE_DIR}/src/position_determinator/position_determinator.cpp
 	)
-add_dependencies( position_determinator 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 target_link_libraries( position_determinator operation_base_class ${catkin_LIBRARIES} )
+add_dependencies( position_determinator 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
