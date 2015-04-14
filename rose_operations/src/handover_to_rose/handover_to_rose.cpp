@@ -28,8 +28,9 @@ HandoverToRose::HandoverToRose( std::string name, ros::NodeHandle n )
     goal_pose.pose.position.z   = 0.3;
 
     double roll  = 0.0;
-    double pitch = -M_PI/2;
-    double yaw   = 0.0;
+    double pitch = -M_PI/2; // correct
+    double yaw   = -M_PI/2; // correct
+    yaw = 0.0;
     goal_pose.pose.orientation = rose_conversions::RPYToQuaterion(roll, pitch, yaw);
 
     setCartesianGoal(arm_name, goal_pose);
