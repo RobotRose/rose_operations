@@ -15,6 +15,8 @@
 ArmDrivingPosition::ArmDrivingPosition( std::string name, ros::NodeHandle n )
     : ArmPoseBaseClass (name, n)
 {
+    //! @todo MdL [IMPR]: Remove hard-coded arm name.
+    //! @todo MdL [CONF]: Configurable pose.
     std::string                arm_name; 
     geometry_msgs::PoseStamped goal_pose;
 
