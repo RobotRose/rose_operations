@@ -33,8 +33,10 @@ class ArmPoseBaseClass : public OperationBaseClass
     ArmPoseBaseClass(std::string name, ros::NodeHandle n);
     ~ArmPoseBaseClass();
     
-  private:
+  protected:
     void setCartesianGoal( const std::string& arm_name, const geometry_msgs::PoseStamped& goal );
+    
+  private:
 
     bool closeGripper( const std::string& arm_name );
     bool sendCartesianGoal( const std::string& arm_name, const geometry_msgs::PoseStamped& goal_pose );
