@@ -60,7 +60,7 @@ bool ArmPoseBaseClass::sendCartesianGoal( const std::string& arm_name, const geo
         return false;
     }
 
-    if ( not smc_->waitForResult(ros::Duration(20.0)) ) // Wait 20s
+    if ( not smc_->waitForResult("arm_controller/position", ros::Duration(20.0)) ) // Wait 20s
         return false;
     else 
         return true;
