@@ -23,12 +23,12 @@ HandoverToRose::HandoverToRose( std::string name, ros::NodeHandle n )
     arm_name                    = "mico";
     goal_pose.header.stamp      = ros::Time::now();
     goal_pose.header.frame_id   = arm_name;
-    goal_pose.pose.position.x   = 0.0;
-    goal_pose.pose.position.y   = 0.0;
-    goal_pose.pose.position.z   = 0.0;
+    goal_pose.pose.position.x   = -0.2;
+    goal_pose.pose.position.y   = -0.4;
+    goal_pose.pose.position.z   = 0.3;
 
     double roll  = 0.0;
-    double pitch = 0.0;
+    double pitch = -M_PI/2;
     double yaw   = 0.0;
     goal_pose.pose.orientation = rose_conversions::RPYToQuaterion(roll, pitch, yaw);
 
