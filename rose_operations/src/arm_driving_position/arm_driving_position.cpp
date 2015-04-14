@@ -37,78 +37,80 @@ void ArmDrivingPosition::CB_goalReceived( const rose_operations::basic_operation
 
 bool ArmDrivingPosition::armAction( const ArmController::Arms& arm, const arm_controller::manipulateGoal& goal )
 {
-    smc_->sendGoal<arm_controller::manipulateAction>(goal, arm_controller_helper_->getClientFor(arm));
-    if (not smc_->waitForResult(arm_controller_helper_->getClientFor(arm), ros::Duration(40.0)))
-        return false;
+    // smc_->sendGoal<arm_controller::manipulateAction>(goal, arm_controller_helper_->getClientFor(arm));
+    // if (not smc_->waitForResult(arm_controller_helper_->getClientFor(arm), ros::Duration(40.0)))
+    //     return false;
 
-    arm_controller::manipulateResultConstPtr result;
+    // arm_controller::manipulateResultConstPtr result;
 
-    try // result can be NULL
-    {
-        result              = smc_->getResultLastestClient<arm_controller::manipulateAction>();
-        result_.return_code = result->return_code;
-    }
-    catch(...) //! @todo MdL: Add correct catch.
-    {
-        result_.return_code = ARM_COMMUNICATION_ERROR;
-        return false;
-    }
+    // try // result can be NULL
+    // {
+    //     result              = smc_->getResultLastestClient<arm_controller::manipulateAction>();
+    //     result_.return_code = result->return_code;
+    // }
+    // catch(...) //! @todo MdL: Add correct catch.
+    // {
+    //     result_.return_code = ARM_COMMUNICATION_ERROR;
+    //     return false;
+    // }
 
-    if ( result_.return_code != ACTION_RESULT::SUCCESS )
-        return false;
-    else
+    // if ( result_.return_code != ACTION_RESULT::SUCCESS )
+    //     return false;
+    // else
         return true;
 }
 
 bool ArmDrivingPosition::closeGripper( const ArmController::Arms& arm )
 {
-    arm_controller::manipulateGoal goal = arm_controller_helper_->closeGripperMessage( arm );
-    return armAction ( arm, goal);
+    // arm_controller::manipulateGoal goal = arm_controller_helper_->closeGripperMessage( arm );
+    // return armAction ( arm, goal);
+
+    return false;
 }
 
 bool ArmDrivingPosition::drivingPosition( const ArmController::Arms& arm )
 {
-    double          roll    = M_PI/2; // rotations of the gripper
-    double          pitch   = 0.0;//M_PI/6;
-    double          yaw     = 0.0;
+    // double          roll    = M_PI/2; // rotations of the gripper
+    // double          pitch   = 0.0;//M_PI/6;
+    // double          yaw     = 0.0;
 
-    arm_controller::manipulateGoal goal;
-    PoseStamped pose;
+    // arm_controller::manipulateGoal goal;
+    // PoseStamped pose;
 
-    //! @todo MdL: poses in base link coordinates!
-    pose.header.frame_id  = "arms";
-    pose.header.stamp     = ros::Time::now();
+    // //! @todo MdL: poses in base link coordinates!
+    // pose.header.frame_id  = "arms";
+    // pose.header.stamp     = ros::Time::now();
 
-    //! @todo MdL: Fix nicely.
-    if (arm == ArmController::Arms::LEFT)
-    {
-        pose.pose.position.x   = -0.23;
-        pose.pose.position.y   = -0.32;
-        pose.pose.position.z   = 0.19;
-        pose.pose.orientation.w = 1.0;
+    // //! @todo MdL: Fix nicely.
+    // if (arm == ArmController::Arms::LEFT)
+    // {
+    //     pose.pose.position.x   = -0.23;
+    //     pose.pose.position.y   = -0.32;
+    //     pose.pose.position.z   = 0.19;
+    //     pose.pose.orientation.w = 1.0;
 
-        goal = arm_controller_helper_->moveToPoseMessage( arm, pose, true );
+    //     goal = arm_controller_helper_->moveToPoseMessage( arm, pose, true );
 
-        goal.required_pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(roll, pitch, yaw); // in left_arm frame
-    }
+    //     goal.required_pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(roll, pitch, yaw); // in left_arm frame
+    // }
 
-    if (arm == ArmController::Arms::RIGHT)
-    {
-        pose.pose.position.x  = 0.23;
-        pose.pose.position.y  = -0.32;
-        pose.pose.position.z  = 0.20;
-        pose.pose.orientation.w = 1.0;
-        goal = arm_controller_helper_->moveToPoseMessage( arm, pose, true );
+    // if (arm == ArmController::Arms::RIGHT)
+    // {
+    //     pose.pose.position.x  = 0.23;
+    //     pose.pose.position.y  = -0.32;
+    //     pose.pose.position.z  = 0.20;
+    //     pose.pose.orientation.w = 1.0;
+    //     goal = arm_controller_helper_->moveToPoseMessage( arm, pose, true );
 
-        pitch = M_PI;
-        goal.required_pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(roll, pitch, yaw);
-    }
+    //     pitch = M_PI;
+    //     goal.required_pose.orientation = tf::createQuaternionMsgFromRollPitchYaw(roll, pitch, yaw);
+    // }
 
-    if ( not armAction(arm, goal) )
-    {
-        ROS_ERROR("End pose (%s) not reached", arm_controller_helper_->armToString(arm).c_str());
-        return false;
-    }
+    // if ( not armAction(arm, goal) )
+    // {
+    //     ROS_ERROR("End pose (%s) not reached", arm_controller_helper_->armToString(arm).c_str());
+    //     return false;
+    // }
 
     return true;
 }
@@ -117,21 +119,21 @@ void ArmDrivingPosition::moveArmToDrivingPosition()
 {
     operator_gui_->message("Arm inklappen (voor rijden)");
 
-    std::vector<ArmController::Arms> arms = arm_controller_helper_->getArms();
-    // Close both grippers
-     for ( const auto& arm : arms )
-        if ( not closeGripper(arm) )
-        {
-            sendResult(false);
-            return;
-        }
+    // std::vector<ArmController::Arms> arms = arm_controller_helper_->getArms();
+    // // Close both grippers
+    //  for ( const auto& arm : arms )
+    //     if ( not closeGripper(arm) )
+    //     {
+    //         sendResult(false);
+    //         return;
+    //     }
 
-    for ( const auto& arm : arms )
-        if ( not drivingPosition(arm))
-        {
-            sendResult(false);
-            return;
-        }
+    // for ( const auto& arm : arms )
+    //     if ( not drivingPosition(arm))
+    //     {
+    //         sendResult(false);
+    //         return;
+    //     }
 
     // To make sure there are on their place
     // Sometimes, arm X moves as arm Y moves to a pose

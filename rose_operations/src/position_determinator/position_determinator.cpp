@@ -285,48 +285,51 @@ bool PositionDeterminator::filterReachablePoints( PointCloud& point_cloud )
 
 bool PositionDeterminator::determinePositionForManipulation( PointCloud& target_points, PoseStamped& required_location )
 {
-	if ( not rose_transformations::transformToFrameNow(tf_, "base_link", target_points))
-		ROS_ERROR("Could not transform points to base_link");
+	//! @todo MdL [IMPL]: Determine position.
+	return false;
+	
+	// if ( not rose_transformations::transformToFrameNow(tf_, "base_link", target_points))
+	// 	ROS_ERROR("Could not transform points to base_link");
 
-	// Get allowed positions
-	PointCloud allowed_points = arm_controller_helper_->getReachablePointCloud();
-	if ( not filteredOnHeight( target_points.header.frame_id, target_points.points[0].z, allowed_points ))
-		ROS_ERROR("Could not get filtered points(1)");
+	// // Get allowed positions
+	// PointCloud allowed_points = arm_controller_helper_->getReachablePointCloud();
+	// if ( not filteredOnHeight( target_points.header.frame_id, target_points.points[0].z, allowed_points ))
+	// 	ROS_ERROR("Could not get filtered points(1)");
 
-	ROS_DEBUG_NAMED(ROS_NAME, "Found %d points near height %f", (int)allowed_points.points.size(), target_points.points[0].z);
+	// ROS_DEBUG_NAMED(ROS_NAME, "Found %d points near height %f", (int)allowed_points.points.size(), target_points.points[0].z);
 
-	if ( not filterReachablePoints(allowed_points))
-		ROS_ERROR("Could not get filtered points(2)");
+	// if ( not filterReachablePoints(allowed_points))
+	// 	ROS_ERROR("Could not get filtered points(2)");
 
-	// Get new locations for the base
-	rose_pose_explorer::reachable_poses reachability_msg;
+	// // Get new locations for the base
+	// rose_pose_explorer::reachable_poses reachability_msg;
 
-	reachability_msg.request.target_points  = target_points;
-	reachability_msg.request.allowed_points = allowed_points;
+	// reachability_msg.request.target_points  = target_points;
+	// reachability_msg.request.allowed_points = allowed_points;
 
-	if ( not reachable_position_service_.call(reachability_msg))
-		ROS_ERROR("Problem getting reachable points");
+	// if ( not reachable_position_service_.call(reachability_msg))
+	// 	ROS_ERROR("Problem getting reachable points");
 
-	ROS_DEBUG_NAMED(ROS_NAME, "Received %d reachable points", (int)reachability_msg.response.reachable_points.size());
+	// ROS_DEBUG_NAMED(ROS_NAME, "Received %d reachable points", (int)reachability_msg.response.reachable_points.size());
 
-	if ( not pickBestPose(reachability_msg.response.reachable_points, target_points, required_location) )
-	{
-		ROS_ERROR("Could not find a best position");
-		return false;
-	}
+	// if ( not pickBestPose(reachability_msg.response.reachable_points, target_points, required_location) )
+	// {
+	// 	ROS_ERROR("Could not find a best position");
+	// 	return false;
+	// }
 
-	// Store the waypoint (in map frame)
-	if ( not rose_transformations::transformToFrame(tf_, "base_link", required_location))
-		ROS_ERROR("Could not transform waypoint to base_link");
+	// // Store the waypoint (in map frame)
+	// if ( not rose_transformations::transformToFrame(tf_, "base_link", required_location))
+	// 	ROS_ERROR("Could not transform waypoint to base_link");
 
-	double current_x = -0.05;
-	double current_y = 0.0;
-	rose_geometry::rotateVect(&current_x, &current_y, tf::getYaw(required_location.pose.orientation));
+	// double current_x = -0.05;
+	// double current_y = 0.0;
+	// rose_geometry::rotateVect(&current_x, &current_y, tf::getYaw(required_location.pose.orientation));
 
-	required_location.pose.position.x += current_x;
-	required_location.pose.position.y += current_y;
+	// required_location.pose.position.x += current_x;
+	// required_location.pose.position.y += current_y;
 
-	publishPose(required_location, true);
+	// publishPose(required_location, true);
 
 	return true;
 }

@@ -11,6 +11,7 @@ find_package(catkin REQUIRED
 	operator_messaging
 	roscomm
 	rose_datamanager_api
+	rose_gaze_controller
 	rose_transformations
 	server_multiple_client
 )
@@ -41,6 +42,7 @@ catkin_package(
 		operator_messaging
 		roscomm
 		rose_datamanager_api
+		rose_gaze_controller
 		rose_transformations
 		server_multiple_client
 	DEPENDS 
@@ -76,27 +78,27 @@ add_dependencies( arm_grabbing_position 	${catkin_EXPORTED_TARGETS} ${PROJECT_NA
 target_link_libraries( arm_grabbing_position operation_base_class ${catkin_LIBRARIES})
 
 # grab
-add_executable( grab 	${PROJECT_SOURCE_DIR}/src/grab/grab_node.cpp
-						${PROJECT_SOURCE_DIR}/src/grab/grab.cpp
-)
-add_dependencies( grab 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries( grab operation_base_class manipulation_base_class ${catkin_LIBRARIES})
+# add_executable( grab 	${PROJECT_SOURCE_DIR}/src/grab/grab_node.cpp
+# 						${PROJECT_SOURCE_DIR}/src/grab/grab.cpp
+# )
+# add_dependencies( grab 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
+# target_link_libraries( grab operation_base_class manipulation_base_class ${catkin_LIBRARIES})
 
 # place
-add_executable( place 	${PROJECT_SOURCE_DIR}/src/place/place_node.cpp
-						${PROJECT_SOURCE_DIR}/src/place/place.cpp
-)
-add_dependencies( place 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries( place operation_base_class manipulation_base_class ${catkin_LIBRARIES})
+# add_executable( place 	${PROJECT_SOURCE_DIR}/src/place/place_node.cpp
+# 						${PROJECT_SOURCE_DIR}/src/place/place.cpp
+# )
+# add_dependencies( place 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
+# target_link_libraries( place operation_base_class manipulation_base_class ${catkin_LIBRARIES})
 
 # give
-add_executable( give 	${PROJECT_SOURCE_DIR}/src/give/give_node.cpp
-						${PROJECT_SOURCE_DIR}/src/give/give.cpp
-)
-add_dependencies( give 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
-target_link_libraries( give operation_base_class ${catkin_LIBRARIES})
+# add_executable( give 	${PROJECT_SOURCE_DIR}/src/give/give_node.cpp
+# 						${PROJECT_SOURCE_DIR}/src/give/give.cpp
+# )
+# add_dependencies( give 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
+# target_link_libraries( give operation_base_class ${catkin_LIBRARIES})
 
-# give
+# handover to rose
 add_executable( handover_to_rose 	${PROJECT_SOURCE_DIR}/src/handover_to_rose/handover_to_rose_node.cpp
 						${PROJECT_SOURCE_DIR}/src/handover_to_rose/handover_to_rose.cpp
 )
@@ -117,7 +119,7 @@ add_executable( say 	${PROJECT_SOURCE_DIR}/src/say/say_node.cpp
 add_dependencies( say 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 target_link_libraries( say operation_base_class ${catkin_LIBRARIES} )
 
-#position_determinator
+# position_determinator
 add_executable( position_determinator 	${PROJECT_SOURCE_DIR}/src/position_determinator/position_determinator_node.cpp
 							${PROJECT_SOURCE_DIR}/src/position_determinator/position_determinator.cpp
 	)

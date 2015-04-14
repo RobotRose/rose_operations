@@ -28,10 +28,10 @@ class HandoverToRose : public OperationBaseClass
     void CB_armActionSuccess( const actionlib::SimpleClientGoalState& state, const arm_controller::manipulateResultConstPtr& result );
     void CB_armActionFail( const actionlib::SimpleClientGoalState& state, const arm_controller::manipulateResultConstPtr& result );
 
-    bool handoverToRoseAction(  );
-    ArmController::Arms pickArm();
-    bool armAction( const ArmController::Arms arm, const arm_controller::manipulateGoal goal );
-    bool openGripper( const ArmController::Arms arm );
+    // bool handoverToRoseAction(  );
+    // ArmController::Arms pickArm();
+    // bool armAction( const ArmController::Arms arm, const arm_controller::manipulateGoal goal );
+    // bool openGripper( const ArmController::Arms arm );
 };
 
 #endif //HANDOVER_TO_ROSE_HPP
