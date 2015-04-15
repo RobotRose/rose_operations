@@ -23,13 +23,14 @@ ArmDrivingPosition::ArmDrivingPosition( std::string name, ros::NodeHandle n )
     arm_name                    = "mico";
     goal_pose.header.stamp      = ros::Time::now();
     goal_pose.header.frame_id   = arm_name;
-    goal_pose.pose.position.x   = 0.0;
-    goal_pose.pose.position.y   = 0.0;
-    goal_pose.pose.position.z   = 0.0;
+    goal_pose.pose.position.x   = -0.080;
+    goal_pose.pose.position.y   = -0.295;
+    goal_pose.pose.position.z   = 0.381;
 
-    double roll  = 0.0;
-    double pitch = 0.0;
-    double yaw   = 0.0;
+    double roll  = 1.437;
+    double pitch = -0.124;
+    double yaw   = -1.416;
+
     goal_pose.pose.orientation = rose_conversions::RPYToQuaterion(roll, pitch, yaw);
 
     setCartesianGoal(arm_name, goal_pose);
