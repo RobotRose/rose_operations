@@ -2,12 +2,12 @@
 * Copyright: Rose B.V. (2014)
 *
 * Revision History:
-*	Author: Mathijs de Langen
-*	Date  : 2014/02/14
-* 		- File created.
+*   Author: Mathijs de Langen
+*   Date  : 2014/02/14
+*       - File created.
 *
 * Description:
-*	description
+*   description
 * 
 ***********************************************************************************/
 #ifndef OPERATION_BASE_CLASS_HPP
@@ -72,50 +72,50 @@
 class OperationBaseClass
 {
   public:
-  	typedef rose_parameter_manager::parameterAction ParameterAction;
-  	typedef boost::function< void (const std::string item_id, const std::vector<std::string> parameter_ids) > ParameterSucces;
+    typedef rose_parameter_manager::parameterAction ParameterAction;
+    typedef boost::function< void (const std::string item_id, const std::vector<std::string> parameter_ids) > ParameterSucces;
 
-	OperationBaseClass( std::string name, ros::NodeHandle n );
-	~OperationBaseClass();
+    OperationBaseClass( std::string name, ros::NodeHandle n );
+    ~OperationBaseClass();
 
   protected:
     typedef ServerMultipleClient<rose_operations::basic_operationAction> SMC;
 
-	virtual void CB_serverCancel( SMC* smc );
-	virtual void CB_goalReceived( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc );
-	
-	virtual void startOperation();
-	virtual void sendResult( bool succes );
+    virtual void CB_serverCancel( SMC* smc );
+    virtual void CB_goalReceived( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc );
+    
+    virtual void startOperation();
+    virtual void sendResult( bool succes );
     virtual void sendResult( bool succes,  std::string message );
 
-	virtual void getParameter( std::string item_id, PARAMETER_REQUEST parameter, ParameterSucces parameter_succes);
-	virtual void CB_getParameterSuccess( const actionlib::SimpleClientGoalState& state, const rose_parameter_manager::parameterResultConstPtr& result );
-	virtual void CB_getParameterFail( const actionlib::SimpleClientGoalState& state, const rose_parameter_manager::parameterResultConstPtr& result );
-	virtual void CB_getParameterActive();
-	virtual void CB_getParameterFeedback( const rose_parameter_manager::parameterFeedbackConstPtr& feedback );
+    virtual void getParameter( std::string item_id, PARAMETER_REQUEST parameter, ParameterSucces parameter_succes);
+    virtual void CB_getParameterSuccess( const actionlib::SimpleClientGoalState& state, const rose_parameter_manager::parameterResultConstPtr& result );
+    virtual void CB_getParameterFail( const actionlib::SimpleClientGoalState& state, const rose_parameter_manager::parameterResultConstPtr& result );
+    virtual void CB_getParameterActive();
+    virtual void CB_getParameterFeedback( const rose_parameter_manager::parameterFeedbackConstPtr& feedback );
 
-	virtual void executeItemAction( const std::string id, const std::vector<std::string> parameters = std::vector<std::string>() );
+    virtual void executeItemAction( const std::string id, const std::vector<std::string> parameters = std::vector<std::string>() );
     virtual void executeMultiItemAction( const std::vector<std::string> item_ids, const std::vector<std::string> parameters = std::vector<std::string>() );
     virtual void executePersonAction( const std::string id, const std::vector<std::string> parameters = std::vector<std::string>() );
     virtual void executeWaypointAction( const std::string id, const std::vector<std::string> parameters = std::vector<std::string>() );
 
     void addParameterManagerClient();
 
-	std::string 						name_;
-	ros::NodeHandle 					n_;
+    std::string                         name_;
+    ros::NodeHandle                     n_;
 
-	DatamanagerAPI*						datamanager_;
-	SMC*								smc_;
+    DatamanagerAPI*                     datamanager_;
+    SMC*                                smc_;
     OperatorMessaging*                  operator_gui_;
 
-	ParameterSucces 					parameter_succes_;
-	
-	rose_operations::basic_operationResult 	result_;
-	std::string 							current_item_id_;
-    std::vector<std::string>				current_item_ids_;
-	std::vector<std::string>				current_parameters_ids_;
-	
-	tf::TransformListener 				tf_;
+    ParameterSucces                     parameter_succes_;
+    
+    rose_operations::basic_operationResult  result_;
+    std::string                             current_item_id_;
+    std::vector<std::string>                current_item_ids_;
+    std::vector<std::string>                current_parameters_ids_;
+    
+    tf::TransformListener               tf_;
 };
 
 #endif //OPERATION_BASE_CLASS_HPP
