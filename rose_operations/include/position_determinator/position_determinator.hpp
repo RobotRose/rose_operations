@@ -23,7 +23,7 @@
 
 #include "operation_base_class/operation_base_class.hpp"
 #include "rose_common/common.hpp"
- 
+#include "rose_transformations/transformations.hpp"
 
 using geometry_msgs::Point32; 
 using geometry_msgs::PointStamped; 

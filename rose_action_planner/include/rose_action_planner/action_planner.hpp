@@ -18,7 +18,6 @@
 #include <geometry_msgs/PointStamped.h>
 
 #include "action_result_message.hpp"
-#include "arm_controller_helper.hpp"
 #include "rose_action_planner/recover.h"
 #include "rose_datamanager_api/datamanager_api.hpp"
 

@@ -25,7 +25,7 @@ Give::~Give()
 
 void Give::CB_armActionSuccess( const actionlib::SimpleClientGoalState& state, const arm_controller::manipulateResultConstPtr& result )
 {
-	sendResult(true);
+	// sendResult(true);
 }
 
 void Give::CB_armActionFail( const actionlib::SimpleClientGoalState& state, const arm_controller::manipulateResultConstPtr& result )
@@ -65,7 +65,7 @@ void Give::continueItemAction( const std::string item_id, const std::vector<std:
 void Give::giveAction( const std::string item_id, const std::vector<std::string> parameters )
 {
 	// std::vector<double> arm_positions(7);
- //    arm_positions[0] 	= 0;
+    // arm_positions[0] 	= 0;
  //    arm_positions[1] 	= M_PI/11;
  //    arm_positions[2] 	= M_PI/11;
  //    arm_positions[3] 	= 0;
