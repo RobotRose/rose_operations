@@ -12,8 +12,6 @@
 ManipulationBaseClass::ManipulationBaseClass( std::string name, ros::NodeHandle n )
 	: OperationBaseClass (name, n)
 {
-	startOperation();
-
 	gaze_client_ = new GazeClient("gaze_controller", true); 
 }
 

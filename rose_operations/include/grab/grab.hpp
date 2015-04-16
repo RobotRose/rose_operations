@@ -15,19 +15,8 @@
 
 #include <unistd.h> //sleep
 
-#include "arm_controller_helper.hpp"
 #include "manipulation_base_class/manipulation_base_class.hpp"
 #include "tf_helper/tf_helper.hpp"
-
-#include "rose_gaze_controller/LookAtAction.h" //! @todo MdL: Coding guidelines (lower case filenames).
-#include "rose_gaze_controller/LookAtGoal.h"   //! @todo MdL: Coding guidelines (lower case filenames).
-#include "arm_controller/toggle_visual_correction.h"
-
-using geometry_msgs::PoseStamped;
-using geometry_msgs::Point;
-using geometry_msgs::Pose;
-using std::vector;
-using std::map;
 
 #define DO_VISUAL_SERVOING true
 #define PRE_GRAB_X        0.07  // in meters
@@ -46,7 +35,9 @@ class Grab : public ManipulationBaseClass
 {
   public:
     typedef actionlib::SimpleActionClient<rose_gaze_controller::LookAtAction> GazeClient; //! @todo MdL: Make SMC.
-    typedef ServerMultipleClient<arm_controller::move_to_tfAction> ArmVisualServoing;
+    typedef ServerMultipleClient<rose_arm_controller_msgs::move_to_tfAction>         ArmVisualServoing;
+    typedef ServerMultipleClient<rose_arm_controller_msgs::set_positionAction>       SMC_position;
+    typedef ServerMultipleClient<rose_arm_controller_msgs::set_gripper_widthAction>  SMC_gripper;
 
     /**
      * Constructor
@@ -59,40 +50,6 @@ class Grab : public ManipulationBaseClass
 	~Grab();
 
   private:
-    /**
-     * Callback when an arm action was successfully executed
-     * @param state  End state
-     * @param result Result message
-     */
-    void CB_armActionSuccess( const actionlib::SimpleClientGoalState& state, const arm_controller::manipulateResultConstPtr& result );
-
-    /**
-     * Callback when an arm action was not successfully executed
-     * @param state  End state
-     * @param result Result message
-     */    
-    void CB_armActionFail( const actionlib::SimpleClientGoalState& state, const arm_controller::manipulateResultConstPtr& result );
-
-    /**
-     * Callback when an arm servoing action was successfully executed
-     * @param state  End state
-     * @param result Result message
-     */
-    void CB_armVisualServoingSuccess( const actionlib::SimpleClientGoalState& state, const arm_controller::move_to_tfResultConstPtr& result );
-
-    /**
-     * Callback when an arm servoing action was not successfully executed
-     * @param state  End state
-     * @param result Result message
-     */    
-    void CB_armVisualServoingFail( const actionlib::SimpleClientGoalState& state, const arm_controller::move_to_tfResultConstPtr& result );
-
-    /**
-     * Callback when feedback of the servoing action was received
-     * @param feedback Feedback message
-     */    
-    void CB_armVisualServoingFeedback( const arm_controller::move_to_tfFeedbackConstPtr& feedback );
-
     /**
      * Callback when a cancel was retrieved
      * @param smc A pointer to the SMC receiving the cancel
@@ -121,20 +78,7 @@ class Grab : public ManipulationBaseClass
      * @param item_id    The item that has to be grabbed
      * @param parameters Additional parameters
      */
-    void preGrabAction( const std::string item_id, const vector<std::string> parameters );
-
-    /**
-     * Continues with the Grab action
-     * @param item_id    Item to grab
-     * @param parameters Additional parameters
-     */
-    void continueGrabAction( const ArmController::Arms arm, const std::string item_id, const vector<std::string> parameters = vector<std::string>() );
-
-    /**
-     * Creates a table pose just below the bounding box of an item
-     * @param bb The bounding box
-     */
-    void createTablePose( const BoundingBox& bb );
+    void executeGrabItem( const std::string item_id, const vector<std::string> parameters );
 
     /**
      * Gets the pose, relative (x,y,z) in base_link to the grabbable object
@@ -163,13 +107,6 @@ class Grab : public ManipulationBaseClass
      */
     bool getPostGrabPose( Item item, PoseStamped& pose );
 
-    bool getDynamicPreGrabPose( const ArmController::Arms arm, Item& item, PoseStamped& pose );
-    /**
-     * Gets the grab pose specifically for item
-     * @param  item The item to grab
-     * @param  pose The pose to retrieve
-     * @return      Whether of not this function was successful
-     */
     bool getGrabPose( Item item, PoseStamped& pose );
 
     /**
@@ -178,26 +115,15 @@ class Grab : public ManipulationBaseClass
      * @param  pose The pose to retrieve
      * @return      Whether of not this function was successful
      */
-    bool getTablePose( Item item, PoseStamped& pose );
 
-    /**
-     * Execute pre grab action. Uses an static distance from the item that has to be grabbed
-     * @param  arm  The arm to do the pre grab action
-     * @param  item The item to pre grab
-     * @return      If the action was successful
-     */
-    bool preGrabStatic( const ArmController::Arms arm, Item item );
-
-    bool preGrabDynamic( const ArmController::Arms arm, Item item );
-
-    bool preGrab( const ArmController::Arms arm, Item item );
+    bool preGrab( const std::string arm_name, Item item );
     /**
      * Execute grab action
      * @param  arm  The arm to do the grab action
      * @param  item The item to grab
      * @return      If the action was successful
      */
-    bool grab( const ArmController::Arms arm, Item item );
+    bool grab( const std::string arm_name, Item item );
 
     /**
      * Execute post grab action
@@ -205,7 +131,7 @@ class Grab : public ManipulationBaseClass
      * @param  item The item to post grab
      * @return      If the action was successful
      */
-    bool postGrab( const ArmController::Arms arm, Item item );
+    bool postGrab( const std::string arm_name, Item item );
 
     /**
      * Visual servoing towards item
@@ -213,23 +139,7 @@ class Grab : public ManipulationBaseClass
      * @param  item Which item
      * @return      If the action was successful
      */
-    bool moveTowardsItem( const ArmController::Arms arm, Item item );
-
-    /**
-     * Sets the table just below the item and in front of the robot
-     * @param  item Which item to put the table below
-     * @return      If the action was successful
-     */
-    bool setTable( Item item );
-
-    /**
-     * Moves table up
-     * @param  arm    [description]
-     * @param  item   [description]
-     * @param  height [description]
-     * @return        [description]
-     */
-    bool moveTableUp( const ArmController::Arms arm, Item item, const double height );
+    bool moveTowardsItem( const std::string arm_name, Item item );
 
     /**
      * Removed all added stuff for the grab to work.
@@ -246,7 +156,9 @@ class Grab : public ManipulationBaseClass
      */
     void sendResultAndCleanup( bool result, Item item, std::string message );
 
+    void grabSuccess( Item item );
     void grabFailed( Item item, std::string message);
+
 };
 
 #endif //GRAB_HPP

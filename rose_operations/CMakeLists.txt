@@ -83,12 +83,19 @@ add_executable( arm_grabbing_position 	${PROJECT_SOURCE_DIR}/src/arm_grabbing_po
 target_link_libraries( arm_grabbing_position arm_pose_base_class ${catkin_LIBRARIES})
 add_dependencies( arm_grabbing_position arm_pose_base_class ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 
+# handover to rose
+add_executable( handover_to_rose 	${PROJECT_SOURCE_DIR}/src/handover_to_rose/handover_to_rose_node.cpp
+						${PROJECT_SOURCE_DIR}/src/handover_to_rose/handover_to_rose.cpp
+)
+target_link_libraries( handover_to_rose arm_pose_base_class ${catkin_LIBRARIES})
+add_dependencies( handover_to_rose 	arm_pose_base_class ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
+
 # grab
-# add_executable( grab 	${PROJECT_SOURCE_DIR}/src/grab/grab_node.cpp
-# 						${PROJECT_SOURCE_DIR}/src/grab/grab.cpp
-# )
-# add_dependencies( grab 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
-# target_link_libraries( grab operation_base_class manipulation_base_class ${catkin_LIBRARIES})
+add_executable( grab 	${PROJECT_SOURCE_DIR}/src/grab/grab_node.cpp
+						${PROJECT_SOURCE_DIR}/src/grab/grab.cpp
+)
+add_dependencies( grab 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
+target_link_libraries( grab operation_base_class manipulation_base_class ${catkin_LIBRARIES})
 
 # place
 # add_executable( place 	${PROJECT_SOURCE_DIR}/src/place/place_node.cpp
@@ -103,15 +110,6 @@ add_dependencies( arm_grabbing_position arm_pose_base_class ${catkin_EXPORTED_TA
 # )
 # add_dependencies( give 	${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
 # target_link_libraries( give operation_base_class ${catkin_LIBRARIES})
-
-# handover to rose
-add_executable( handover_to_rose 	${PROJECT_SOURCE_DIR}/src/handover_to_rose/handover_to_rose_node.cpp
-						${PROJECT_SOURCE_DIR}/src/handover_to_rose/handover_to_rose.cpp
-)
-target_link_libraries( handover_to_rose arm_pose_base_class ${catkin_LIBRARIES})
-add_dependencies( handover_to_rose 	arm_pose_base_class ${catkin_EXPORTED_TARGETS} ${PROJECT_NAME}_generate_messages_cpp)
-
-
 
 # move_to
 add_executable( move_to 	${PROJECT_SOURCE_DIR}/src/move_to/move_to_node.cpp

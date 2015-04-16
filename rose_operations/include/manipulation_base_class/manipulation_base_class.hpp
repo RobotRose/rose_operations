@@ -16,20 +16,11 @@
 #include <unistd.h> //sleep
 
 #include "operation_base_class/operation_base_class.hpp"
+#include "rose_transformations/transformations.hpp"
 #include "tf_helper/tf_helper.hpp"
 
 #include "rose_gaze_controller/LookAtAction.h" //! @todo MdL: Coding guidelines (lower case filenames).
 #include "rose_gaze_controller/LookAtGoal.h"   //! @todo MdL: Coding guidelines (lower case filenames).
-
-using geometry_msgs::PoseStamped;
-using geometry_msgs::Point;
-using geometry_msgs::Pose;
-using std::vector;
-using std::map;
-
-#define MIN_GRIPPER_TABLE_DIST 0.08 // in meters
-#define TABLE_HEIGHT      2.00  // (twice extent in simulator robai) in meters
-#define BASE_LINK_LENGTH  0.64
 
 /**
  * ManipulationBaseClass class. Retrieves some functionality from the OperationBaseClass
@@ -99,7 +90,7 @@ class ManipulationBaseClass : public OperationBaseClass
     // ArmVisualServoing*  arm_visual_servoing_;       //!< The visual servoing server
 
 
-    map<std::string, TFHelper*>   transforms_;      //!< All transforms stored by this class
+    std::map<std::string, TFHelper*>   transforms_;      //!< All transforms stored by this class
 
     boost::mutex        transforms_mutex_;          //!< Transforms are TFHelper pointers
 };
