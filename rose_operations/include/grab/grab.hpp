@@ -35,9 +35,6 @@ class Grab : public ManipulationBaseClass
 {
   public:
     typedef actionlib::SimpleActionClient<rose_gaze_controller::LookAtAction> GazeClient; //! @todo MdL: Make SMC.
-    typedef ServerMultipleClient<rose_arm_controller_msgs::move_to_tfAction>         ArmVisualServoing;
-    typedef ServerMultipleClient<rose_arm_controller_msgs::set_positionAction>       SMC_position;
-    typedef ServerMultipleClient<rose_arm_controller_msgs::set_gripper_widthAction>  SMC_gripper;
 
     /**
      * Constructor
