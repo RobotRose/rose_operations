@@ -155,7 +155,6 @@ class Grab : public ManipulationBaseClass
 
     void grabSuccess( Item item );
     void grabFailed( Item item, std::string message);
-
 };
 
 #endif //GRAB_HPP
