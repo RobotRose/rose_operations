@@ -23,13 +23,13 @@ ArmDrivingPosition::ArmDrivingPosition( std::string name, ros::NodeHandle n )
     arm_name                    = "mico";
     goal_pose.header.stamp      = ros::Time::now();
     goal_pose.header.frame_id   = arm_name;
-    goal_pose.pose.position.x   = -0.224;
-    goal_pose.pose.position.y   = -0.179;
-    goal_pose.pose.position.z   = 0.281;
+    goal_pose.pose.position.x   = -0.330;
+    goal_pose.pose.position.y   = -0.124;
+    goal_pose.pose.position.z   = 0.258; 
 
-    double roll  = -1.443;
-    double pitch = -0.110;
-    double yaw   = -1.474;
+    double roll  = -1.611;
+    double pitch = -0.040;
+    double yaw   = -2.270;
 
     goal_pose.pose.orientation = rose_conversions::RPYToQuaterion(roll, pitch, yaw);
 
