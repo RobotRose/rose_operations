@@ -29,7 +29,6 @@ class ManipulationBaseClass : public OperationBaseClass
 {
   public:
     typedef actionlib::SimpleActionClient<rose_gaze_controller::LookAtAction> GazeClient; //! @todo MdL: Make SMC.
-    // typedef ServerMultipleClient<rose_arm_controller_msgs::move_to_tfAction> ArmVisualServoing;
 
     /**
      * Constructor
@@ -48,14 +47,6 @@ class ManipulationBaseClass : public OperationBaseClass
     void broadcastTransforms();
 
   protected:
-    /**
-     * Sends a visual servoing goal to the visual servoing node. Waits and retrieves the result. It also sends
-     * an aborted message as a server when the goal has failed. 
-     * @param  goal The goal for the visual servoing node
-     * @return      If the action was successful
-     */
-    // bool visualServoingAction ( const rose_arm_controller_msgs::move_to_tfGoal goal );
-
     /**
      * Creates transform with name and pose_stamped
      * @param name         Name of the transform
@@ -87,8 +78,6 @@ class ManipulationBaseClass : public OperationBaseClass
     const bool lookAt( const std::string frame_id, const bool keep_tracking=false);
 
     GazeClient*         gaze_client_;               //!< Client to look at a specific point
-    // ArmVisualServoing*  arm_visual_servoing_;       //!< The visual servoing server
-
 
     std::map<std::string, TFHelper*>   transforms_;      //!< All transforms stored by this class
 
