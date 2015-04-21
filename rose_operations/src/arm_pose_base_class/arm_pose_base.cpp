@@ -68,6 +68,8 @@ bool ArmPoseBaseClass::sendCartesianGoal( const std::string& arm_name, const geo
 
 void ArmPoseBaseClass::moveArms()
 {
+    operator_gui_->message("Going to move arm");
+    
     bool result = true;
     ROS_INFO("Move arms");
     for ( const auto& goal : cartesian_goal_ )
