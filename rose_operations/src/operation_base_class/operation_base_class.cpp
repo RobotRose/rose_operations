@@ -94,7 +94,7 @@ void OperationBaseClass::sendResult( bool succes )
 	if ( succes )
 	{
 		result_.return_code = SUCCESS;
-		operator_gui_->message("Operatie geslaagd"/*toupper(name_.c_str()[0])+" finished succesfully"*/);
+		operator_gui_->message("Operation successful"/*toupper(name_.c_str()[0])+" finished succesfully"*/);
 	}
 	else
 	{
