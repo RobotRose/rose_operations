@@ -22,7 +22,7 @@ ArmDrivingPosition::ArmDrivingPosition( std::string name, ros::NodeHandle n )
 
     arm_name                    = "mico";
     goal_pose.header.stamp      = ros::Time::now();
-    goal_pose.header.frame_id   = arm_name;
+    goal_pose.header.frame_id   = arm_name + "_link_base";
     goal_pose.pose.position.x   = -0.330;
     goal_pose.pose.position.y   = -0.124;
     goal_pose.pose.position.z   = 0.258; 

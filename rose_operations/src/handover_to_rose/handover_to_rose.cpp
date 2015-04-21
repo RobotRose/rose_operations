@@ -22,10 +22,10 @@ HandoverToRose::HandoverToRose( std::string name, ros::NodeHandle n )
 
     arm_name                    = "mico";
     goal_pose.header.stamp      = ros::Time::now();
-    goal_pose.header.frame_id   = arm_name;
-    goal_pose.pose.position.x   = -0.2;
-    goal_pose.pose.position.y   = -0.4;
-    goal_pose.pose.position.z   = 0.3;
+    goal_pose.header.frame_id   = arm_name + "_link_base";
+    goal_pose.pose.position.x   = -0.196;
+    goal_pose.pose.position.y   = -0.378;
+    goal_pose.pose.position.z   = 0.323;
 
     double roll  = -M_PI/2;
     double pitch = 0.0; // correct
