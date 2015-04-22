@@ -35,7 +35,38 @@ void ArmPoseBaseClass::setCartesianGoal( const std::string& arm_name, const geom
 bool ArmPoseBaseClass::closeGripper( const std::string& arm_name )
 {
     if ( not cartesian_goal_set_ )
+    {
+        ROS_ERROR("This arm pose operation does not have a cartesian goal set");
         return false;
+    }
+
+    operator_gui_->message("Going to close gripper");
+
+    rose_arm_controller_msgs::set_gripper_widthGoal goal;
+
+    goal.arm            = arm_name;
+    goal.required_width = 0.0; // Close the gripper
+
+    if ( not smc_->sendGoal<rose_arm_controller_msgs::set_gripper_widthAction>(goal, "arm_controller/gripper_width"))
+    {
+        ROS_ERROR("Could not send goal to the arm controller");
+        return false;
+    }
+    
+    send_message_ = true;
+    std::thread (boost::bind(&ArmPoseBaseClass::sendWaitingMessage, this)).detach();
+
+    ROS_INFO("Sending goal");
+    if ( not smc_->waitForSuccess("arm_controller/gripper_width", ros::Duration(10.0)) ) // Wait 10s
+    {
+        send_message_ = false;
+        return false;
+    }
+    else
+    {
+        send_message_ = false;
+        return true;
+    }
 
     return false;
 }
@@ -48,6 +79,8 @@ bool ArmPoseBaseClass::sendCartesianGoal( const std::string& arm_name, const geo
         ROS_ERROR("This arm pose operation does not have a cartesian goal set");
         return false;
     }
+
+    operator_gui_->message("Going to move arm");
 
     rose_arm_controller_msgs::set_positionGoal goal;
 
@@ -78,20 +111,26 @@ bool ArmPoseBaseClass::sendCartesianGoal( const std::string& arm_name, const geo
 
 void ArmPoseBaseClass::moveArms()
 {
-    operator_gui_->message("Going to move arm");
+    operator_gui_->message("Going to position");
     
     bool result = true;
     ROS_INFO("Move arms");
     for ( const auto& goal : cartesian_goal_ )
+    {
+        result &= closeGripper(goal.first);
         result &= sendCartesianGoal(goal.first, goal.second);
+    }
 
     sendResult(result);
 }
 
 void ArmPoseBaseClass::sendWaitingMessage()
 {
-    ros::Rate rate(2); // Twice per second
+    ros::Rate wait_to_begin(0.5); // Two seconds
+    wait_to_begin.sleep();
+
     int count = 0;
+    ros::Rate rate(2);            // Publish message per second
     while ( send_message_ )
     {
         std::string dots = ".";
@@ -100,7 +139,6 @@ void ArmPoseBaseClass::sendWaitingMessage()
 
         operator_gui_->message("Please wait" + dots);
         count++;
-
         rate.sleep();
     }
 }
