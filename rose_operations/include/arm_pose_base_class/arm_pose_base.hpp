@@ -14,6 +14,7 @@
 #define ARM_POSE_BASE_CLASS_HPP
 
 #include <string>
+#include <thread>
 
 #include "operation_base_class/operation_base_class.hpp"
 
@@ -37,14 +38,16 @@ class ArmPoseBaseClass : public OperationBaseClass
     void setCartesianGoal( const std::string& arm_name, const geometry_msgs::PoseStamped& goal );
     
   private:
-
     bool closeGripper( const std::string& arm_name );
     bool sendCartesianGoal( const std::string& arm_name, const geometry_msgs::PoseStamped& goal_pose );
     void moveArms();
 
+    void sendWaitingMessage();
+
     void CB_goalReceived(const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc);
 
-    bool            cartesian_goal_set_;
+    std::atomic<bool> send_message_;
+    bool              cartesian_goal_set_;
 
     // To store goals for each arm
     std::map<std::string,geometry_msgs::PoseStamped> cartesian_goal_;
