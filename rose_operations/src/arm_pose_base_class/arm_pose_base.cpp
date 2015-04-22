@@ -59,11 +59,21 @@ bool ArmPoseBaseClass::sendCartesianGoal( const std::string& arm_name, const geo
         ROS_ERROR("Could not send goal to the arm controller");
         return false;
     }
+    
+    send_message_ = true;
+    std::thread (boost::bind(&ArmPoseBaseClass::sendWaitingMessage, this)).detach();
 
+    ROS_INFO("Sending goal");
     if ( not smc_->waitForSuccess("arm_controller/position", ros::Duration(20.0)) ) // Wait 20s
+    {
+        send_message_ = false;
         return false;
-    else 
+    }
+    else
+    {
+        send_message_ = false;
         return true;
+    }
 }
 
 void ArmPoseBaseClass::moveArms()
@@ -76,6 +86,23 @@ void ArmPoseBaseClass::moveArms()
         result &= sendCartesianGoal(goal.first, goal.second);
 
     sendResult(result);
+}
+
+void ArmPoseBaseClass::sendWaitingMessage()
+{
+    ros::Rate rate(2); // Twice per second
+    int count = 0;
+    while ( send_message_ )
+    {
+        std::string dots = ".";
+        for ( int i = 0 ; i < count % 3 ; i++ )
+            dots += ".";
+
+        operator_gui_->message("Please wait" + dots);
+        count++;
+
+        rate.sleep();
+    }
 }
 
 void ArmPoseBaseClass::CB_goalReceived( const rose_operations::basic_operationGoalConstPtr& goal, SMC* smc )
