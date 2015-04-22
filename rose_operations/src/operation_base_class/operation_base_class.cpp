@@ -94,11 +94,11 @@ void OperationBaseClass::sendResult( bool succes )
 	if ( succes )
 	{
 		result_.return_code = SUCCESS;
-		operator_gui_->message("Operation successful"/*toupper(name_.c_str()[0])+" finished succesfully"*/);
+		operator_gui_->message("Operation successful");
 	}
 	else
 	{
-		// operator_gui_->message("Received an error"/*toupper(name_.c_str()[0])+"%s had an error"*/);
+		operator_gui_->warn("Operation failed");
 	}
 	smc_->sendServerResult( succes, result_ );
 }
