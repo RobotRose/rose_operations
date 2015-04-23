@@ -42,8 +42,10 @@ bool ArmPoseBaseClass::closeGripper( const std::string& arm_name )
 
     operator_gui_->message("Going to close gripper");
 
-    rose_arm_controller_msgs::set_gripper_widthGoal goal;
+    send_message_ = true;
+    std::thread (boost::bind(&ArmPoseBaseClass::sendWaitingMessage, this)).detach();
 
+    rose_arm_controller_msgs::set_gripper_widthGoal goal;
     goal.arm            = arm_name;
     goal.required_width = 0.0; // Close the gripper
 
@@ -52,9 +54,6 @@ bool ArmPoseBaseClass::closeGripper( const std::string& arm_name )
         ROS_ERROR("Could not send goal to the arm controller");
         return false;
     }
-    
-    send_message_ = true;
-    std::thread (boost::bind(&ArmPoseBaseClass::sendWaitingMessage, this)).detach();
 
     ROS_INFO("Sending goal");
     if ( not smc_->waitForSuccess("arm_controller/gripper_width", ros::Duration(10.0)) ) // Wait 10s
@@ -81,9 +80,11 @@ bool ArmPoseBaseClass::sendCartesianGoal( const std::string& arm_name, const geo
     }
 
     operator_gui_->message("Going to move arm");
+    
+    send_message_ = true;
+    std::thread (boost::bind(&ArmPoseBaseClass::sendWaitingMessage, this)).detach();
 
     rose_arm_controller_msgs::set_positionGoal goal;
-
     goal.arm            = arm_name;
     goal.required_pose  = goal_pose;
 
@@ -92,9 +93,6 @@ bool ArmPoseBaseClass::sendCartesianGoal( const std::string& arm_name, const geo
         ROS_ERROR("Could not send goal to the arm controller");
         return false;
     }
-    
-    send_message_ = true;
-    std::thread (boost::bind(&ArmPoseBaseClass::sendWaitingMessage, this)).detach();
 
     ROS_INFO("Sending goal");
     if ( not smc_->waitForSuccess("arm_controller/position", ros::Duration(20.0)) ) // Wait 20s
@@ -126,11 +124,9 @@ void ArmPoseBaseClass::moveArms()
 
 void ArmPoseBaseClass::sendWaitingMessage()
 {
-    ros::Rate wait_to_begin(0.5); // Two seconds
-    wait_to_begin.sleep();
-
-    int count = 0;
-    ros::Rate rate(2);            // Publish message per second
+    ros::Rate rate(0.5); // Two seconds
+    int count = 0;         // Publish message per two seconds
+    
     while ( send_message_ )
     {
         std::string dots = ".";
