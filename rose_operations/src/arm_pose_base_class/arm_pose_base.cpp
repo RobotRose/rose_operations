@@ -40,7 +40,7 @@ bool ArmPoseBaseClass::closeGripper( const std::string& arm_name )
         return false;
     }
 
-    operator_gui_->message("Going to close gripper");
+    operator_gui_->message("Closing gripper");
 
     send_message_ = true;
     std::thread (boost::bind(&ArmPoseBaseClass::sendWaitingMessage, this)).detach();
@@ -79,7 +79,7 @@ bool ArmPoseBaseClass::sendCartesianGoal( const std::string& arm_name, const geo
         return false;
     }
 
-    operator_gui_->message("Going to move arm");
+    operator_gui_->message("Calculating arm movement");
     
     send_message_ = true;
     std::thread (boost::bind(&ArmPoseBaseClass::sendWaitingMessage, this)).detach();
@@ -109,7 +109,7 @@ bool ArmPoseBaseClass::sendCartesianGoal( const std::string& arm_name, const geo
 
 void ArmPoseBaseClass::moveArms()
 {
-    operator_gui_->message("Going to position");
+    operator_gui_->message("Moving arm to position");
     
     bool result = true;
     ROS_INFO("Move arms");
@@ -119,7 +119,10 @@ void ArmPoseBaseClass::moveArms()
         result &= sendCartesianGoal(goal.first, goal.second);
     }
 
-    sendResult(result);
+    if ( result )
+        sendResult(result, "Executing arm movement");
+    else
+        sendResult(result, "Could not find a valid plan");
 }
 
 void ArmPoseBaseClass::sendWaitingMessage()
