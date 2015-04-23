@@ -119,8 +119,7 @@ void ArmPoseBaseClass::moveArms()
         result &= sendCartesianGoal(goal.first, goal.second);
     }
 
-    // sendResult(result);
-    sendResult(true);
+    sendResult(result);
 }
 
 void ArmPoseBaseClass::sendWaitingMessage()
